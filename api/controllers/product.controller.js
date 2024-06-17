@@ -29,6 +29,10 @@ const getProductsByFilter = async (req, res) => {
 
   let filters = {};
 
+  if (!auth.checkToken(req)) {
+    filters.isIllegal = false;
+  }
+
   if (priceRange) {
     const [minPrice, maxPrice] = priceRange.split("-").map(Number);
     if (isNaN(minPrice) || isNaN(maxPrice)) {

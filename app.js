@@ -13,10 +13,7 @@ const { connectDB } = require("./api/config/db");
 
 //CONTROLLERS
 const { auth } = require("./api/controllers/auth.controller");
-const {
-  getCategories,
-  createCategory,
-} = require("./api/controllers/category.controller");
+const { category } = require("./api/controllers/category.controller");
 const { products } = require("./api/controllers/product.controller");
 const { sendPurchaseMail } = require("./api/utils/email");
 
@@ -30,25 +27,16 @@ app.use("*.css", (req, res, next) => {
   next();
 });
 
-//
-//
-//
 //*AUTH
 router.post("/auth/register", auth.register);
 router.post("/auth/login", auth.login);
 router.post("/auth/logout", auth.logoutUser);
 
-//
-//
-//
 //*PRODUCT
 // router.get("/products", auth.authenticateJWT, products.getAllProducts);
 router.get("/products", products.getAllProducts);
-router.get(
-  "/products/getProductsByFilter",
-  auth.authenticateJWT,
-  products.getProductsByFilter
-);
+router.get("/products/getProductsByFilter", products.getProductsByFilter);
+
 router.post("/products", products.createProduct);
 
 router.put("/products", products.updateProduct);
@@ -58,13 +46,10 @@ router.post("/products/email", (req, res) => {
   res.status(200).send("");
 });
 
-//
-//
-//
 //*CATEGORIES
-router.get("/categories", getCategories);
+router.get("/categories", category.getCategories);
 
-router.post("/categories", createCategory);
+router.post("/categories", category.createCategory);
 
 // app.get("/", (req, res) => res.sendFile(__dirname + "/public/index.html"));
 

@@ -32,4 +32,9 @@ const createCategory = async (req, res) => {
   }
 };
 
-module.exports = { getCategories, createCategory };
+const category = {
+  getCategories,
+  createCategory,
+};
+
+module.exports = { category };
