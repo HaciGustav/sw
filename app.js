@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 8080;
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
-// app.use(express.static("./public"));
+app.use(express.static("./public"));
 app.use("*.css", (req, res, next) => {
   res.set("Content-Type", "text/css");
   next();
@@ -66,16 +66,7 @@ router.get("/categories", getCategories);
 
 router.post("/categories", createCategory);
 
-router.put("/categories/:id", (req, res) => {
-  //TODO:
-});
-router.delete("/categories/:id", (req, res) => {
-  //TODO:
-});
-
-const f = (req, res) => res.sendFile(__dirname + "/public/login.html");
-
-app.get("/", auth.authenticateJWT, f);
+// app.get("/", (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
 //SWAGGER
 const options = {
