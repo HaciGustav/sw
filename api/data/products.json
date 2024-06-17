@@ -1,0 +1,482 @@
+[
+  {
+    "id": "1",
+    "image": [
+      "https://cdn.pixabay.com/photo/2016/11/01/17/11/cp-1788949_960_720.jpg"
+    ],
+    "title": "Wireless Mouse",
+    "price": 29.99,
+    "category": "Electronics",
+    "description": "A reliable wireless mouse with ergonomic design and long battery life.",
+    "tags": ["mouse", "wireless", "electronics"]
+  },
+  {
+    "id": "2",
+    "image": [
+      "https://cdn.pixabay.com/photo/2015/05/26/23/52/technology-785742_1280.jpg"
+    ],
+    "title": "Mechanical Keyboard",
+    "price": 89.99,
+    "category": "Electronics",
+    "description": "A mechanical keyboard with customizable RGB lighting and durable switches.",
+    "tags": ["keyboard", "mechanical", "electronics"]
+  },
+  {
+    "id": "3",
+    "image": [
+      "https://cdn.pixabay.com/photo/2016/12/01/18/17/mobile-phone-1875813_960_720.jpg"
+    ],
+    "title": "Smartphone",
+    "price": 699.99,
+    "category": "Electronics",
+    "description": "A high-end smartphone with a stunning display and powerful camera.",
+    "tags": ["smartphone", "mobile", "electronics"]
+  },
+  {
+    "id": "4",
+    "image": ["https://example.com/image4.jpg"],
+    "title": "Bluetooth Speaker",
+    "price": 49.99,
+    "category": "Electronics",
+    "description": "Portable Bluetooth speaker with excellent sound quality and long battery life.",
+    "tags": ["speaker", "bluetooth", "electronics"]
+  },
+  {
+    "id": "5",
+    "image": ["https://example.com/image5.jpg"],
+    "title": "Laptop",
+    "price": 1199.99,
+    "category": "Electronics",
+    "description": "A powerful laptop with a high-resolution display and fast performance.",
+    "tags": ["laptop", "computer", "electronics"]
+  },
+  {
+    "id": "6",
+    "image": ["https://example.com/image6.jpg"],
+    "title": "Smartwatch",
+    "price": 199.99,
+    "category": "Electronics",
+    "description": "A stylish smartwatch with fitness tracking and notification features.",
+    "tags": ["smartwatch", "wearable", "electronics"]
+  },
+  {
+    "id": "7",
+    "image": ["https://example.com/image7.jpg"],
+    "title": "Gaming Headset",
+    "price": 59.99,
+    "category": "Electronics",
+    "description": "A comfortable gaming headset with surround sound and a noise-canceling microphone.",
+    "tags": ["headset", "gaming", "electronics"]
+  },
+  {
+    "id": "8",
+    "image": ["https://example.com/image8.jpg"],
+    "title": "Tablet",
+    "price": 329.99,
+    "category": "Electronics",
+    "description": "A versatile tablet with a high-resolution display and long battery life.",
+    "tags": ["tablet", "mobile", "electronics"]
+  },
+  {
+    "id": "9",
+    "image": ["https://example.com/image9.jpg"],
+    "title": "External Hard Drive",
+    "price": 79.99,
+    "category": "Electronics",
+    "description": "A high-capacity external hard drive with fast data transfer speeds.",
+    "tags": ["hard drive", "storage", "electronics"]
+  },
+  {
+    "id": "10",
+    "image": ["https://example.com/image10.jpg"],
+    "title": "Digital Camera",
+    "price": 499.99,
+    "category": "Electronics",
+    "description": "A compact digital camera with high-quality image and video capture.",
+    "tags": ["camera", "photography", "electronics"]
+  },
+  {
+    "id": "11",
+    "image": [
+      "https://cdn.pixabay.com/photo/2016/08/15/19/57/red-devils-1596355_960_720.jpg"
+    ],
+    "title": "T-shirt",
+    "price": 19.99,
+    "category": "Clothing",
+    "description": "A comfortable cotton t-shirt available in various colors.",
+    "tags": ["t-shirt", "clothing", "apparel"]
+  },
+  {
+    "id": "12",
+    "image": [
+      "https://media.istockphoto.com/id/1413637822/de/foto/draufsicht-auf-gefaltete-jeans-blue-jeans-auf-einem-stapel-jeans-draufsicht-auf-verschiedene.jpg?s=2048x2048&w=is&k=20&c=IFrQJe8xOtLkRbImuL8gNXFlGKouXylPHw6OSAinazY="
+    ],
+    "title": "Jeans",
+    "price": 49.99,
+    "category": "Clothing",
+    "description": "Stylish and durable jeans with a perfect fit.",
+    "tags": ["jeans", "clothing", "apparel"]
+  },
+  {
+    "id": "13",
+    "image": [
+      "https://cdn.pixabay.com/photo/2016/11/29/01/34/man-1866572_1280.jpg"
+    ],
+    "title": "Jacket",
+    "price": 79.99,
+    "category": "Clothing",
+    "description": "A warm and stylish jacket suitable for all seasons.",
+    "tags": ["jacket", "clothing", "outerwear"]
+  },
+  {
+    "id": "14",
+    "image": ["https://example.com/image14.jpg"],
+    "title": "Sneakers",
+    "price": 59.99,
+    "category": "Clothing",
+    "description": "Comfortable and trendy sneakers for everyday wear.",
+    "tags": ["sneakers", "clothing", "footwear"]
+  },
+  {
+    "id": "15",
+    "image": ["https://example.com/image15.jpg"],
+    "title": "Dress",
+    "price": 69.99,
+    "category": "Clothing",
+    "description": "A beautiful dress perfect for any occasion.",
+    "tags": ["dress", "clothing", "apparel"]
+  },
+  {
+    "id": "16",
+    "image": ["https://example.com/image16.jpg"],
+    "title": "Sweater",
+    "price": 39.99,
+    "category": "Clothing",
+    "description": "A cozy sweater available in various colors and styles.",
+    "tags": ["sweater", "clothing", "apparel"]
+  },
+  {
+    "id": "17",
+    "image": ["https://example.com/image17.jpg"],
+    "title": "Hat",
+    "price": 15.99,
+    "category": "Clothing",
+    "description": "A stylish hat to complement any outfit.",
+    "tags": ["hat", "clothing", "accessories"]
+  },
+  {
+    "id": "18",
+    "image": ["https://example.com/image18.jpg"],
+    "title": "Scarf",
+    "price": 19.99,
+    "category": "Clothing",
+    "description": "A warm and fashionable scarf for the colder months.",
+    "tags": ["scarf", "clothing", "accessories"]
+  },
+  {
+    "id": "19",
+    "image": ["https://example.com/image19.jpg"],
+    "title": "Socks",
+    "price": 9.99,
+    "category": "Clothing",
+    "description": "Comfortable and durable socks available in various colors.",
+    "tags": ["socks", "clothing", "apparel"]
+  },
+  {
+    "id": "20",
+    "image": ["https://example.com/image20.jpg"],
+    "title": "Belt",
+    "price": 29.99,
+    "category": "Clothing",
+    "description": "A stylish belt made from high-quality materials.",
+    "tags": ["belt", "clothing", "accessories"]
+  },
+  {
+    "id": "21",
+    "image": [
+      "https://cdn.pixabay.com/photo/2023/09/20/00/27/grogu-8263658_640.jpg"
+    ],
+    "title": "Action Figure",
+    "price": 24.99,
+    "category": "Toys",
+    "description": "A highly detailed action figure from a popular franchise.",
+    "tags": ["action figure", "toys", "collectibles"]
+  },
+  {
+    "id": "22",
+    "image": [
+      "https://cdn.pixabay.com/photo/2016/11/28/10/48/child-1864718_640.jpg"
+    ],
+    "title": "Building Blocks",
+    "price": 49.99,
+    "category": "Toys",
+    "description": "A set of building blocks for creative and educational play.",
+    "tags": ["building blocks", "toys", "construction"]
+  },
+  {
+    "id": "23",
+    "image": [
+      "https://cdn.pixabay.com/photo/2016/12/18/12/39/doll-1915614_640.jpg"
+    ],
+    "title": "Doll",
+    "price": 29.99,
+    "category": "Toys",
+    "description": "A beautiful doll with realistic features and accessories.",
+    "tags": ["doll", "toys", "kids"]
+  },
+  {
+    "id": "24",
+    "image": ["https://example.com/image24.jpg"],
+    "title": "Remote Control Car",
+    "price": 39.99,
+    "category": "Toys",
+    "description": "A fast and durable remote control car for endless fun.",
+    "tags": ["remote control", "car", "toys"]
+  },
+  {
+    "id": "25",
+    "image": ["https://example.com/image25.jpg"],
+    "title": "Puzzle",
+    "price": 14.99,
+    "category": "Toys",
+    "description": "A challenging puzzle with beautiful artwork.",
+    "tags": ["puzzle", "toys", "games"]
+  },
+  {
+    "id": "26",
+    "image": ["https://example.com/image26.jpg"],
+    "title": "Board Game",
+    "price": 34.99,
+    "category": "Toys",
+    "description": "A fun and engaging board game for the whole family.",
+    "tags": ["board game", "toys", "games"]
+  },
+  {
+    "id": "27",
+    "image": ["https://example.com/image27.jpg"],
+    "title": "Stuffed Animal",
+    "price": 19.99,
+    "category": "Toys",
+    "description": "A soft and cuddly stuffed animal.",
+    "tags": ["stuffed animal", "toys", "kids"]
+  },
+  {
+    "id": "28",
+    "image": ["https://example.com/image28.jpg"],
+    "title": "Lego Set",
+    "price": 59.99,
+    "category": "Toys",
+    "description": "An exciting Lego set for building creative structures.",
+    "tags": ["lego", "toys", "construction"]
+  },
+  {
+    "id": "29",
+    "image": ["https://example.com/image29.jpg"],
+    "title": "Action Hero Costume",
+    "price": 39.99,
+    "category": "Toys",
+    "description": "A realistic action hero costume for imaginative play.",
+    "tags": ["costume", "toys", "dress-up"]
+  },
+  {
+    "id": "30",
+    "image": ["https://example.com/image30.jpg"],
+    "title": "Train Set",
+    "price": 69.99,
+    "category": "Toys",
+    "description": "A detailed train set with tracks and accessories.",
+    "tags": ["train set", "toys", "kids"]
+  },
+  {
+    "id": "31",
+    "image": [
+      "https://cdn.pixabay.com/photo/2012/08/13/22/08/filled-54416_640.jpg"
+    ],
+    "title": "Cookware Set",
+    "price": 99.99,
+    "category": "Home & Kitchen",
+    "description": "A complete cookware set with non-stick pots and pans.",
+    "tags": ["cookware", "kitchen", "home"]
+  },
+  {
+    "id": "32",
+    "image": [
+      "https://cdn.pixabay.com/photo/2015/03/03/18/39/vacuum-cleaner-657719_640.jpg"
+    ],
+    "title": "Vacuum Cleaner",
+    "price": 149.99,
+    "category": "Home & Kitchen",
+    "description": "A powerful vacuum cleaner with multiple attachments.",
+    "tags": ["vacuum cleaner", "cleaning", "home"]
+  },
+  {
+    "id": "33",
+    "image": [
+      "https://cdn.pixabay.com/photo/2011/12/05/14/49/blender-10934_640.jpg"
+    ],
+    "title": "Blender",
+    "price": 49.99,
+    "category": "Home & Kitchen",
+    "description": "A high-performance blender for smoothies and more.",
+    "tags": ["blender", "kitchen", "appliances"]
+  },
+  {
+    "id": "34",
+    "image": ["https://example.com/image34.jpg"],
+    "title": "Coffee Maker",
+    "price": 79.99,
+    "category": "Home & Kitchen",
+    "description": "A programmable coffee maker with a built-in grinder.",
+    "tags": ["coffee maker", "kitchen", "appliances"]
+  },
+  {
+    "id": "35",
+    "image": ["https://example.com/image35.jpg"],
+    "title": "Knife Set",
+    "price": 59.99,
+    "category": "Home & Kitchen",
+    "description": "A high-quality knife set with a variety of blades.",
+    "tags": ["knife set", "kitchen", "cutlery"]
+  },
+  {
+    "id": "36",
+    "image": ["https://example.com/image36.jpg"],
+    "title": "Air Fryer",
+    "price": 99.99,
+    "category": "Home & Kitchen",
+    "description": "A versatile air fryer for healthier cooking.",
+    "tags": ["air fryer", "kitchen", "appliances"]
+  },
+  {
+    "id": "37",
+    "image": ["https://example.com/image37.jpg"],
+    "title": "Toaster Oven",
+    "price": 69.99,
+    "category": "Home & Kitchen",
+    "description": "A compact toaster oven with multiple functions.",
+    "tags": ["toaster oven", "kitchen", "appliances"]
+  },
+  {
+    "id": "38",
+    "image": ["https://example.com/image38.jpg"],
+    "title": "Dish Rack",
+    "price": 29.99,
+    "category": "Home & Kitchen",
+    "description": "A sturdy dish rack with ample space for drying.",
+    "tags": ["dish rack", "kitchen", "home"]
+  },
+  {
+    "id": "39",
+    "image": ["https://example.com/image39.jpg"],
+    "title": "Pressure Cooker",
+    "price": 89.99,
+    "category": "Home & Kitchen",
+    "description": "A fast and efficient pressure cooker for easy meals.",
+    "tags": ["pressure cooker", "kitchen", "appliances"]
+  },
+  {
+    "id": "40",
+    "image": ["https://example.com/image40.jpg"],
+    "title": "Mixing Bowls",
+    "price": 24.99,
+    "category": "Home & Kitchen",
+    "description": "A set of stainless steel mixing bowls in various sizes.",
+    "tags": ["mixing bowls", "kitchen", "home"]
+  },
+  {
+    "id": "41",
+    "image": [
+      "https://cdn.pixabay.com/photo/2019/11/24/18/48/yoga-4650150_640.jpg"
+    ],
+    "title": "Yoga Mat",
+    "price": 29.99,
+    "category": "Sports & Outdoors",
+    "description": "A comfortable and durable yoga mat for all practices.",
+    "tags": ["yoga mat", "fitness", "sports"]
+  },
+  {
+    "id": "42",
+    "image": [
+      "https://cdn.pixabay.com/photo/2020/04/07/16/05/fitness-5013986_640.jpg"
+    ],
+    "title": "Dumbbell Set",
+    "price": 59.99,
+    "category": "Sports & Outdoors",
+    "description": "A set of adjustable dumbbells for strength training.",
+    "tags": ["dumbbells", "fitness", "sports"]
+  },
+  {
+    "id": "43",
+    "image": [
+      "https://cdn.pixabay.com/photo/2024/02/01/12/18/man-8545861_640.jpg"
+    ],
+    "title": "Treadmill",
+    "price": 499.99,
+    "category": "Sports & Outdoors",
+    "description": "A high-quality treadmill with multiple workout programs.",
+    "tags": ["treadmill", "fitness", "sports"]
+  },
+  {
+    "id": "44",
+    "image": ["https://example.com/image44.jpg"],
+    "title": "Basketball",
+    "price": 19.99,
+    "category": "Sports & Outdoors",
+    "description": "A durable basketball suitable for indoor and outdoor play.",
+    "tags": ["basketball", "sports", "outdoors"]
+  },
+  {
+    "id": "45",
+    "image": ["https://example.com/image45.jpg"],
+    "title": "Tennis Racket",
+    "price": 69.99,
+    "category": "Sports & Outdoors",
+    "description": "A lightweight and sturdy tennis racket for all levels.",
+    "tags": ["tennis racket", "sports", "outdoors"]
+  },
+  {
+    "id": "46",
+    "image": ["https://example.com/image46.jpg"],
+    "title": "Camping Tent",
+    "price": 129.99,
+    "category": "Sports & Outdoors",
+    "description": "A spacious and waterproof camping tent for outdoor adventures.",
+    "tags": ["camping tent", "outdoors", "camping"]
+  },
+  {
+    "id": "47",
+    "image": ["https://example.com/image47.jpg"],
+    "title": "Sleeping Bag",
+    "price": 59.99,
+    "category": "Sports & Outdoors",
+    "description": "A warm and comfortable sleeping bag for all seasons.",
+    "tags": ["sleeping bag", "outdoors", "camping"]
+  },
+  {
+    "id": "48",
+    "image": ["https://example.com/image48.jpg"],
+    "title": "Hiking Boots",
+    "price": 89.99,
+    "category": "Sports & Outdoors",
+    "description": "Durable and comfortable hiking boots for all terrains.",
+    "tags": ["hiking boots", "outdoors", "sports"]
+  },
+  {
+    "id": "49",
+    "image": ["https://example.com/image49.jpg"],
+    "title": "Kayak",
+    "price": 299.99,
+    "category": "Sports & Outdoors",
+    "description": "A lightweight and stable kayak for water adventures.",
+    "tags": ["kayak", "outdoors", "sports"]
+  },
+  {
+    "id": "50",
+    "image": ["https://example.com/image50.jpg"],
+    "title": "Golf Club Set",
+    "price": 399.99,
+    "category": "Sports & Outdoors",
+    "description": "A complete set of golf clubs for beginners and pros.",
+    "tags": ["golf clubs", "sports", "outdoors"]
+  }
+]
