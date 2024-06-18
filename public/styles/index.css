@@ -63,6 +63,10 @@ body {
   transition: display 0s, opacity 0.5s linear, scale 0.2s, filter 0.3s;
 }
 
+.grid-item-m{
+  max-width: 300px;
+}
+
 .grid-item:hover {
   border-radius: 10px;
   filter: drop-shadow(0px 0px 5px rgba(0, 255, 0, 0.1333333333));
@@ -116,10 +120,6 @@ body {
 
 [data-animated=true] .h-scroll-wrapper:has(.grid-item:hover) {
   animation-play-state: paused;
-}
-
-.h-scroll-wrapper img {
-  height: 300px;
 }
 
 .h-scroll-container[data-animated=true] {

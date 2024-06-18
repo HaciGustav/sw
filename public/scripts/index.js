@@ -157,6 +157,11 @@ function filter(elmnt, category){
                     <div id="product_${index}" class="product_popover" popover>${product.title}</div>
                 </button>
                 `
+                scroll.innerHTML += `
+                    <li class="grid-item grid-item-m">
+                        <img src="${product.images[0]}" alt="${product.title}">
+                        <div class="overlay">${product.title}</div>
+                    </li>`
             })
         })
     }
