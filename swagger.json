@@ -149,27 +149,37 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "Jewellery"
+              "example": "Beauty"
             }
           },
           {
-            "name": "categoryID",
+            "name": "category",
             "in": "query",
             "description": "Category filter",
             "required": false,
             "schema": {
               "type": "string",
-              "example": "1"
+              "example": "Clothing"
             }
           },
           {
-            "name": "name",
+            "name": "title",
             "in": "query",
             "description": "Name filter",
             "required": false,
             "schema": {
               "type": "string",
-              "example": "Sample"
+              "example": "Jeans"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID filter",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "1"
             }
           }
         ],

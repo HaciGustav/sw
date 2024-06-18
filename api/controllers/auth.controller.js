@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { assignID } = require("../utils/helpers");
 
 const SECRET_KEY = "silkyway_is_the_best";
+const tokenExpiresIn = 24 * 60 * 60; // hours * minutes * seconds
 
 const login = async (req, res) => {
   try {
@@ -20,8 +21,20 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, {
-      expiresIn: 100000000,
+      expiresIn: tokenExpiresIn,
     });
+
+    res.cookie(
+      "user",
+      {
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        cart: user.cart,
+      },
+      { httpOnly: false }
+    );
 
     res
       .status(200)
@@ -67,8 +80,20 @@ const register = async (req, res) => {
       { id: newUser.id, email: newUser.email },
       SECRET_KEY,
       {
-        expiresIn: 100000000,
+        expiresIn: tokenExpiresIn,
       }
+    );
+
+    res.cookie(
+      "user",
+      {
+        id: newUser.id,
+        firstname: newUser.firstname,
+        lastname: newUser.lastname,
+        email: newUser.email,
+        cart: newUser.cart,
+      },
+      { httpOnly: false }
     );
 
     res
@@ -88,13 +113,19 @@ const register = async (req, res) => {
   }
 };
 
-const checkToken = (req) => {
+const checkToken = (req, res) => {
   try {
     const token = req.cookies.token;
+    if (!token) {
+      return false;
+    }
     const decoded = jwt.verify(token, SECRET_KEY);
     req.user = decoded;
     return true;
   } catch (error) {
+    console.log("ERROR=>> ", error);
+    res.clearCookie("token");
+    res.clearCookie("user");
     return false;
   }
 };
@@ -109,13 +140,13 @@ const authenticateJWT = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    res.redirect(400, "/login");
+    console.log(error);
   }
 };
 
 // Logout User
 const logoutUser = (req, res) => {
-  res.clearCookie("token").send("Logged out successfully");
+  res.clearCookie().send("Logged out successfully");
 };
 
 const auth = {

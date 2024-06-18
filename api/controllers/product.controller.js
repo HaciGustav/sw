@@ -7,7 +7,7 @@ const { auth } = require("./auth.controller");
 const getAllProducts = async (req, res) => {
   const filter = {};
   try {
-    if (!auth.checkToken(req)) {
+    if (!auth.checkToken(req, res)) {
       filter.isIllegal = false;
     }
     const data = await Product.find(filter).select("-_id -__v");
@@ -29,7 +29,7 @@ const getProductsByFilter = async (req, res) => {
 
   let filters = {};
 
-  if (!auth.checkToken(req)) {
+  if (!auth.checkToken(req, res)) {
     filters.isIllegal = false;
   }
 
