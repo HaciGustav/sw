@@ -5,4 +5,19 @@ const assignID = (data) => {
   return tempID + 1;
 };
 
-module.exports = { assignID };
+const convertCurrency = async (products) => {
+  const url = "https://api.coinconvert.net/convert/usd/btc?amount=";
+  const editedProducts = [];
+  for (const product of products) {
+    const response = await fetch(url + product.price).then((res) => {
+      if (res.ok) return res.json();
+      return { BTC: 0 };
+    });
+
+    editedProducts.push({ ...product._doc, price_BTC: response.BTC });
+  }
+  // console.log(editedProducts);
+  return editedProducts;
+};
+
+module.exports = { assignID, convertCurrency };

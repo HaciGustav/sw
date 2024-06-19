@@ -1,6 +1,6 @@
 const Product = require("../models/product.model");
 const Category = require("../models/category.model");
-const { assignID } = require("../utils/helpers");
+const { assignID, convertCurrency } = require("../utils/helpers");
 const { auth } = require("./auth.controller");
 
 //* GET ALL PRODUCTS
@@ -11,8 +11,13 @@ const getAllProducts = async (req, res) => {
       filter.isIllegal = false;
     }
     const data = await Product.find(filter).select("-_id -__v");
-    res.json(data);
+
+    const edited = await convertCurrency(data);
+
+    // console.log(edited);
+    res.json(edited);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -67,7 +72,8 @@ const getProductsByFilter = async (req, res) => {
 
   try {
     const data = await Product.find(filters).select("-_id -__v");
-    res.json(data);
+    const edited = await convertCurrency(data);
+    res.json(edited);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
