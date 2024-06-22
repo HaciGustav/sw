@@ -32,6 +32,11 @@ const UserModel = new Schema(
       type: Number,
       default: 100,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     cart: {
       type: Array,
       default: [],

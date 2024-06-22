@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { assignID } = require("../utils/helpers");
+const { assignID, getAvatar } = require("../utils/helpers");
 
 const SECRET_KEY = "silkyway_is_the_best";
 const tokenExpiresIn = 24 * 60 * 60; // hours * minutes * seconds
@@ -24,6 +24,8 @@ const login = async (req, res) => {
       expiresIn: tokenExpiresIn,
     });
 
+    const avatar = await getAvatar(user.firstname, user.lastname);
+    console.log(avatar);
     res.cookie(
       "user",
       {
@@ -31,6 +33,7 @@ const login = async (req, res) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
+        // avatar,
         cart: user.cart,
       },
       { httpOnly: false }
@@ -44,6 +47,7 @@ const login = async (req, res) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
+        avatar: avatar,
         token: token,
         cart: user.cart,
       });

@@ -40,7 +40,11 @@ router.get("/products/getProductsByFilter", products.getProductsByFilter);
 router.post("/products", products.createProduct);
 
 router.put("/products", products.updateProduct);
+
 router.delete("/products/:id", products.deleteProduct);
+
+router.patch("/products/:id", products.modifyProduct);
+
 router.post("/products/email", (req, res) => {
   sendPurchaseMail();
   res.status(200).send("");

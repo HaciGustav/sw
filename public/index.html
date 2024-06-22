@@ -1,64 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Silkyway</title>
-    <link rel="stylesheet" href="styles/index.css">
-</head>
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
 
-<body>
+  <body>
     <div id="login" popover>
-        <div class="form_container">
-            <form class="form" id="login-form" action="javascript:login()" onsubmit="validate_login()">
-                <div class="bg-image-2"></div>
-                <h2>Login</h2>
-                <input name="email" type="text" placeholder="email" required>
-                <input name="password" type="password" placeholder="password" required>
-                <button type="submit">LOGIN</button>
-                <button class="button-link" type="button" popovertarget="register">Sign-Up instead</button>
-            </form>
-        </div>
+      <div class="form_container">
+        <form
+          class="form"
+          id="login-form"
+          action="javascript:login()"
+          onsubmit="validate_login()"
+        >
+          <div class="bg-image-2"></div>
+          <h2>Login</h2>
+          <input name="email" type="text" placeholder="email" required />
+          <input
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+          />
+          <button type="submit">LOGIN</button>
+          <button class="button-link" type="button" popovertarget="register">
+            Sign-Up instead
+          </button>
+        </form>
+      </div>
     </div>
     <div id="register" popover>
-        <div class="form_container">
-            <form class="form" id="register-form" action="javascript:register()" onsubmit="validate_register()">
-                <div class="bg-image-2"></div>
-                <h2>Sign-Up</h2>
-                <input name="email" type="text" placeholder="email" required>
-                <input name="firstname" type="text" placeholder="firstname" required>
-                <input name="lastname" type="text" placeholder="lastname" required>
-                <input name="address" type="text" placeholder="address" required>
-                <input name="password" type="password" placeholder="password" required>
-                <input name="password2" type="password" placeholder="repeat password" required>
-                <button type="submit">SAVE</button>
-            </form>
-        </div>
+      <div class="form_container">
+        <form
+          class="form"
+          id="register-form"
+          action="javascript:register()"
+          onsubmit="validate_register()"
+        >
+          <div class="bg-image-2"></div>
+          <h2>Sign-Up</h2>
+          <input name="email" type="text" placeholder="email" required />
+          <input
+            name="firstname"
+            type="text"
+            placeholder="firstname"
+            required
+          />
+          <input name="lastname" type="text" placeholder="lastname" required />
+          <input name="address" type="text" placeholder="address" required />
+          <input
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+          />
+          <input
+            name="password2"
+            type="password"
+            placeholder="repeat password"
+            required
+          />
+          <button type="submit">SAVE</button>
+        </form>
+      </div>
     </div>
     <nav class="navbar">
-        <img src="./pics/logo.jpg">
-        <ul>
-            <li><a href="#grid">Home</a></li>
-            <li><a href="#scroll">Scroll</a></li>
-            <li><a href="#filter">Filter</a></li>
-            <li><button popovertarget="login">Login</button></li>
-        </ul>
+      <img src="./pics/logo.jpg" />
+      <ul>
+        <li><a href="#grid">Home</a></li>
+        <li><a href="#scroll">Scroll</a></li>
+        <li><a href="#filter">Filter</a></li>
+        <li><button popovertarget="login">Login</button></li>
+      </ul>
     </nav>
 
     <section id="grid" class="grid-section">
-        <div class="grid-container">
-
-        </div>
+      <div class="grid-container"></div>
     </section>
     <section id="scroll" class="horizontal-section">
-        <h2>Angebote</h2>
-        <div class="h-scroll-container">
-            <ul class="h-scroll-wrapper">
-            </ul>
-        </div>
+      <h2>Angebote</h2>
+      <div class="h-scroll-container">
+        <ul class="h-scroll-wrapper"></ul>
+      </div>
     </section>
-</body>
-<script defer src="scripts/index.js"></script>
-
+  </body>
+  <script defer src="scripts/index.js"></script>
 </html>

@@ -1,4 +1,5 @@
 //! NOTE FROM MEHMET:
+//! PART-1
 //!  after login and register you get user credentials in cookies
 //* 'user=j:{"id":8,"firstname":"gustave","lastname":"lebon","email":"gustave@lebon.com","cart":[]}'
 //!  if you want to display or use them implement the following code (or use it as an inspiration)
@@ -11,6 +12,7 @@
 //* "email": "gustave@lebon.com",
 //* "cart": []
 //* }
+//!
 //! END
 
 const scrollers = document.querySelectorAll(".h-scroll-container");
@@ -18,6 +20,32 @@ const scrollers = document.querySelectorAll(".h-scroll-container");
 if (!window.matchMedia("(prefers-reduces-motion: reduced)").matches) {
   initAnimations();
 }
+
+const createAvatar = async (name) => {
+  const img = document.createElement("img");
+  const url = `https://robohash.org/${name}?size=200x200`;
+  await fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      img.src = URL.createObjectURL(blob);
+    })
+    .catch((err) => {
+      console.log(err);
+      img.src = "https://robohash.org/default";
+    });
+  document.querySelector("nav ul").appendChild(img);
+};
+
+const getUserCred = () => {
+  const cookies = decodeURIComponent(document.cookie);
+
+  if (!cookies) {
+    return;
+  }
+
+  const user = JSON.parse(cookies.substring(7));
+  return user;
+};
 
 function initAnimations() {
   scrollers.forEach((scroller) => {
@@ -123,8 +151,32 @@ const validate_register = () => {
   }
 };
 
-const login = () => {
-  fetch("/api/auth/login", {
+const login = async () => {
+  try {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: document.forms["login-form"]["email"].value,
+        password: document.forms["login-form"]["password"].value,
+      }),
+    }).then((response) => {
+      // console.log(response);
+      if (!response.ok) {
+        alert("The login attempt has failed!");
+      } else {
+        return response.json();
+      }
+    });
+
+    createAvatar(res.firstname);
+  } catch (error) {
+    console.error(error);
+  }
+
+  /*   const res = await fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -135,15 +187,18 @@ const login = () => {
     }),
   })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       if (!response.ok) {
         alert("The login attempt has failed!");
+      } else {
+        return response.json();
       }
     })
     .catch((error) => {
       console.error(error);
       alert("There has been an error!");
     });
+ */
 };
 
 const register = () => {
@@ -201,4 +256,7 @@ window.onload = () => {
                     </li>`;
       });
     });
+
+  const user = getUserCred();
+  createAvatar(user?.firstname);
 };

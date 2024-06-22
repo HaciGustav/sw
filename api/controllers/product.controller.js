@@ -203,7 +203,7 @@ const deleteProduct = async (req, res) => {
     }
 
     // Check if the product exists
-    const product = await Product.findById(id).exec();
+    const product = await Product.findOne({ id }).select("-_id -__v");
     if (!product) {
       return res.status(404).send("Product not found with the given ID");
     }
@@ -217,12 +217,50 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const modifyProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const payload = req.body;
+    console.log(payload);
+    if (id === undefined) {
+      return res.status(400).send("ID is required");
+    }
+
+    if (!Object.keys(payload)) {
+      return res.status(204).send("No Content given");
+    }
+
+    const product = await Product.findOne({ id: id }).select("-_id -__v");
+    if (!product) {
+      return res.status(404).send("Product not found with the given ID");
+    }
+
+    for (const key in payload) {
+      product[key] = payload[key];
+      console.log(product[key]);
+    }
+
+    product.save();
+    console.log(product);
+    res.status(200).send(product);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred while updating the product");
+  }
+};
+const checkout = async (req, res) => {
+  try {
+    const { email, products } = req.body;
+  } catch (error) {}
+};
+
 const products = {
   getAllProducts,
   getProductsByFilter,
   createProduct,
   updateProduct,
   deleteProduct,
+  modifyProduct,
 };
 
 module.exports = {

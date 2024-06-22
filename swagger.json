@@ -36,97 +36,6 @@
     }
   ],
   "paths": {
-    "/api/products": {
-      "get": {
-        "tags": ["Products"],
-        "summary": "Get list of products",
-        "responses": {
-          "200": {
-            "description": "A list of products",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "post": {
-        "tags": ["Products"],
-        "summary": "Create a new product",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Product"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Product created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "put": {
-        "tags": ["Products"],
-        "summary": "Create a new product",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Product"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Product created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
     "/api/products/getProductsByFilter": {
       "get": {
         "tags": ["Products"],
@@ -209,7 +118,163 @@
         }
       }
     },
+    "/api/products": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get list of products",
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
 
+      "post": {
+        "tags": ["Products"],
+        "summary": "Create a new product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Product created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Products"],
+        "summary": "Update a product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Product created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/api/products/{id}": {
+      "patch": {
+        "tags": ["Products"],
+        "summary": "Modify a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "Product has been modified"
+          },
+          "404": {
+            "description": "Product not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Products"],
+        "summary": "Delete a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "60d6e88f53112345678d960c"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Product deleted"
+          },
+          "404": {
+            "description": "Product not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/api/categories": {
       "get": {
         "tags": ["Categories"],

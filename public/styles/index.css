@@ -41,6 +41,13 @@ body {
   text-decoration: none;
 }
 
+.navbar ul img {
+  /* user avatar */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 .grid-section,
 .horizontal-section,
 .flex-section {
@@ -63,7 +70,7 @@ body {
   transition: display 0s, opacity 0.5s linear, scale 0.2s, filter 0.3s;
 }
 
-.grid-item-m{
+.grid-item-m {
   max-width: 300px;
 }
 
@@ -112,19 +119,25 @@ body {
   overflow: auto;
 }
 
-[data-animated=true] .h-scroll-wrapper {
+[data-animated="true"] .h-scroll-wrapper {
   flex-wrap: nowrap;
   width: max-content;
   animation: scroll-h 60s linear infinite;
 }
 
-[data-animated=true] .h-scroll-wrapper:has(.grid-item:hover) {
+[data-animated="true"] .h-scroll-wrapper:has(.grid-item:hover) {
   animation-play-state: paused;
 }
 
-.h-scroll-container[data-animated=true] {
+.h-scroll-container[data-animated="true"] {
   overflow: hidden;
-  -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
   mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
 }
 
@@ -204,12 +217,12 @@ button:has(.grid-item) {
   background-color: transparent;
 }
 
-div:has(.form_container){
+div:has(.form_container) {
   background-color: transparent;
   border: none;
 }
 
-.form_container{
+.form_container {
   height: 100%;
   flex: 1;
   display: grid;
@@ -218,13 +231,13 @@ div:has(.form_container){
 
 .form {
   background-color: #5b5b5b;
-  padding: .5rem;
-  border-radius: calc(5px + .5rem);
+  padding: 0.5rem;
+  border-radius: calc(5px + 0.5rem);
   text-align: center;
 }
 
 .form h2 {
-  margin: 1rem 0 .5rem 0;
+  margin: 1rem 0 0.5rem 0;
   color: #ffffff;
   font-size: 40px;
   font-weight: bold;
@@ -254,7 +267,7 @@ div:has(.form_container){
   cursor: pointer;
 }
 
-.form button.button-link{
+.form button.button-link {
   background-color: transparent;
   color: blue;
 }
