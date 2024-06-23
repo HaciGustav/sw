@@ -2,6 +2,14 @@ import { getAllProducts } from "./index.js";
 
 let isLoading = false;
 const productsStore = [];
+
+const titleInput = document.querySelector("#product-title");
+const priceInput = document.querySelector("#product-price");
+const categoryInput = document.querySelector("#product-category");
+const descriptionInput = document.querySelector("#product-description");
+const updateButton = document.querySelector("#update-btn");
+const deleteButton = document.querySelector("#delete-btn");
+
 const displayProducts = (products) => {
   const grid = document.querySelector(".grid-container");
   products.forEach((product, index) => {
@@ -43,15 +51,22 @@ const displayProducts = (products) => {
   });
 };
 
+//If Users clicks on a product, the form inputs are filled with choosen product infos
 const fillInputs = (e) => {
   const id = e.target.closest(".grid-item").getAttribute("data-product-id");
-  console.log(id);
+
+  const product = productsStore.find((p) => p.id === Number(id));
+
+  titleInput.value = product.title;
+  priceInput.value = product.price;
+  categoryInput.value = product.category;
+  descriptionInput.value = product.description;
 };
 
 window.onload = () => {
   isLoading = true;
 
-  getAllProducts()
+  getAllProducts() // Fetch Products from BE //! Function defined in index.js
     .then((data) => displayProducts(data))
     .then(() => {
       const productCards = document.querySelectorAll(".grid-item");

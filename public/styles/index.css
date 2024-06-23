@@ -299,4 +299,13 @@ div:has(.form_container) {
   background-color: #00cb00;
 }
 
+#cart-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+#cart-container .cart-product {
+}
+
 /*# sourceMappingURL=index.css.map */

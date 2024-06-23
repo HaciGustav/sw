@@ -15,10 +15,9 @@
 //!
 //! END
 
-import { addToCart } from "./productEvents.js";
+import { addToCart, displayCartContent } from "./productEvents.js";
 
 const productsStore = [];
-let isLoading = false;
 
 const scrollers = document.querySelectorAll(".h-scroll-container");
 
@@ -290,68 +289,6 @@ const displayProducts = (products) => {
 };
 
 window.onload = () => {
-  isLoading = true;
-  // fetch("/api/products")
-  //   .then((resp) => {
-  //     if (!resp.ok) {
-  //       alert("There has been an error!");
-  //     }
-  //     return resp.json();
-  //   })
-  //   .then((products) => {
-  //     products.forEach((product, index) => {
-  //       productsStore.push(product);
-  //       grid.innerHTML += `
-  //               <button popovertarget="product_${index}" data-product-id= ${
-  //         product.id
-  //       }>
-  //                   <div class="grid-item grid-item-xl">
-  //                       <img src="${product.images[0]}" alt="${product.title}">
-  //                       <div class="overlay">${product.title}</div>
-  //                   </div>
-  //                   <div id="product_${index}" class="product_popover" popover>
-  //                   <span class="close-popover" >X</span>
-  //                    <img src=${
-  //                      product.images[0]
-  //                    } alt="Product Image" class="product-img" />
-  //                   <div class="product-details">
-  //                     <div class="product-tags">
-  //                     ${product.tags
-  //                       .map((tag) => `<span class="tag">${tag}</span>`)
-  //                       .join("")}
-  //                     </div>
-  //                     <h2 class="product-title">Product Title</h2>
-  //                     <p class="product-price">
-  //                       Price: <span class="usd-price">$${
-  //                         product.price
-  //                       }</span> |
-  //                       <span class="btc-price">${product.price_BTC} BTC</span>
-  //                     </p>
-  //                     <p class="product-description">
-  //                     ${product.description}
-  //                     </p>
-  //                      <span class="add-to-cart" data-product-id=${
-  //                        product.id
-  //                      }>Add to Cart</span>
-  //                   </div>
-  //                   </div>
-  //               </button>
-  //               `;
-  //       scroll.innerHTML += `
-  //                   <li class="grid-item grid-item-m">
-  //                       <img src="${product.images[0]}" alt="${product.title}">
-  //                       <div class="overlay">${product.title}</div>
-  //                   </li>`;
-  //     });
-  //   })
-  //   .then(() => {
-  //     const addToCartButtons = document.querySelectorAll(".add-to-cart");
-  //     console.log(addToCartButtons);
-  //     addToCartButtons.forEach((btn) => {
-  //       btn.addEventListener("click", addToCart);
-  //     });
-  //   });
-
   getAllProducts()
     .then((data) => displayProducts(data))
     .then(() => {
@@ -361,6 +298,9 @@ window.onload = () => {
         btn.addEventListener("click", addToCart);
       });
     });
+
+  const cartBtn = document.querySelector("#shopping-cart");
+  cartBtn.addEventListener("click", () => displayCartContent(productsStore));
 
   const user = getUserCred();
   createAvatar(user?.firstname);

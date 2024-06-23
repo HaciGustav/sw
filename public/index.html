@@ -73,13 +73,16 @@
         </form>
       </div>
     </div>
+    <div id="cart-container" popover></div>
     <nav class="navbar">
       <img src="./pics/logo.jpg" />
       <ul>
         <!-- <li><a href="#grid">Home</a></li> -->
         <li><a href="#filter">Filter</a></li>
         <li>
-          <a href="#scroll"><i class="fa-solid fa-cart-shopping"></i></a>
+          <button id="shopping-cart" popovertarget="cart-container">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
         </li>
         <li><button popovertarget="login">Login</button></li>
       </ul>
