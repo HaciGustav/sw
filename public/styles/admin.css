@@ -71,6 +71,12 @@ form textarea {
   border-radius: 4px;
 }
 
+form .btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 form button {
   padding: 0.7em;
   background-color: #007bff;
