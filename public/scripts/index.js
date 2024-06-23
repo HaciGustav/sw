@@ -171,7 +171,7 @@ const login = () => {
       password: document.forms["login-form"]["password"].value,
     }),
   }).then((response) => {
-    // console.log(response);
+    console.log(response);
     if (!response.ok) {
       alert("The login attempt has failed!");
     } else {
