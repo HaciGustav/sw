@@ -2,6 +2,7 @@ const Product = require("../models/product.model");
 const Category = require("../models/category.model");
 const { assignID, convertCurrency } = require("../utils/helpers");
 const { auth } = require("./auth.controller");
+const { sendPurchaseMail } = require("../utils/email");
 
 //* GET ALL PRODUCTS
 const getAllProducts = async (req, res) => {
@@ -250,8 +251,18 @@ const modifyProduct = async (req, res) => {
 };
 const checkout = async (req, res) => {
   try {
-    const { email, products } = req.body;
-  } catch (error) {}
+    const { email, productIDs } = req.body;
+
+    const purchasedProducts = Product.find({
+      id: {
+        $in: productIDs,
+      },
+    });
+    sendPurchaseMail(purchasedProducts);
+    res.status(200).send(purchasedProducts);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const products = {
@@ -261,6 +272,7 @@ const products = {
   updateProduct,
   deleteProduct,
   modifyProduct,
+  checkout,
 };
 
 module.exports = {

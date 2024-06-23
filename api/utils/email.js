@@ -144,10 +144,11 @@ const createPurchaseMail = (user, product) => {
   return mail;
 };
 
-const sendPurchaseMail = async () => {
+const sendPurchaseMail = async (products) => {
   const prod = { name: "Beautiful Moustache", price: 15, quantity: 10 };
   const user = { name: "John Doe", email: "gustavelebon1941@gmail.com" };
-
+  console.log(products);
+  return;
   const mail = createPurchaseMail(user, prod);
   transporter
     .sendMail(mail)
