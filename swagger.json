@@ -118,6 +118,7 @@
         }
       }
     },
+
     "/api/products/checkout": {
       "post": {
         "tags": ["Products"],
@@ -128,9 +129,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
-                    "type": "string",
-                    "format": "email"
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "firstname": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["email", "firstname"]
                   },
                   "productIDs": {
                     "type": "array",
@@ -139,7 +149,7 @@
                     }
                   }
                 },
-                "required": ["email", "productIDs"]
+                "required": ["user", "productIDs"]
               }
             }
           },
@@ -165,6 +175,7 @@
         }
       }
     },
+
     "/api/products": {
       "get": {
         "tags": ["Products"],

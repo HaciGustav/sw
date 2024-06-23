@@ -251,14 +251,12 @@ const modifyProduct = async (req, res) => {
 };
 const checkout = async (req, res) => {
   try {
-    const { email, productIDs } = req.body;
-
-    const purchasedProducts = Product.find({
-      id: {
-        $in: productIDs,
-      },
-    });
-    sendPurchaseMail(purchasedProducts);
+    const { user, productIDs } = req.body;
+    console.log(productIDs);
+    const purchasedProducts = await Product.find({
+      id: { $in: [...productIDs] },
+    }).exec();
+    await sendPurchaseMail(user, purchasedProducts);
     res.status(200).send(purchasedProducts);
   } catch (error) {
     console.log(error);

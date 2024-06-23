@@ -15,9 +15,14 @@
 //!
 //! END
 
-import { addToCart, displayCartContent } from "./productEvents.js";
+import {
+  addToCart,
+  checkoutProducts,
+  displayCartContent,
+  removeFromCart,
+} from "./productEvents.js";
 
-const productsStore = [];
+export const productsStore = [];
 
 const scrollers = document.querySelectorAll(".h-scroll-container");
 const login_popover = document.querySelector("#login");
@@ -25,6 +30,8 @@ const register_popover = document.querySelector("#register");
 const loginButton = document.querySelector("#login-btn");
 const logoutButton = document.querySelector("#logout-btn");
 const userImg = document.querySelector("#user_img");
+
+const checkoutBtn = document.querySelector(".checkout-button");
 
 if (!window.matchMedia("(prefers-reduces-motion: reduced)").matches) {
   initAnimations();
@@ -331,6 +338,8 @@ window.onload = () => {
 
   const user = getUserCred();
   createAvatar(user?.firstname);
+
+  checkoutBtn.addEventListener("click", (e) => checkoutProducts(user));
 
   if (user) {
     console.log(user);
