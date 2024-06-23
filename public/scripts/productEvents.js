@@ -17,3 +17,13 @@ export const addToCart = (e) => {
   localStorage.setItem("cart", JSON.stringify(cart));
   console.log(cart);
 };
+
+//CART POPOVER
+/**
+ * retrieve all products from localStorage with localStorage.getItem("cart")
+ * cart.forEach(p=> {
+ * const product =  productStore.find(item=> item.id === p.id)
+ * if product then abbilden (product.price, product.title,product.images[0])
+ * else geh weiter
+ * })
+ */
