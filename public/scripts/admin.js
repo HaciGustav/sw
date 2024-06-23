@@ -1,7 +1,8 @@
 import { getAllProducts } from "./index.js";
 
-let isLoading = false;
 const productsStore = [];
+
+const form = document.querySelector("form");
 
 const titleInput = document.querySelector("#product-title");
 const priceInput = document.querySelector("#product-price");
@@ -53,7 +54,9 @@ const displayProducts = (products) => {
 
 //If Users clicks on a product, the form inputs are filled with choosen product infos
 const fillInputs = (e) => {
+  // get the data-product-id value of the closest parent element of the clicked item which has className ".grid-item"
   const id = e.target.closest(".grid-item").getAttribute("data-product-id");
+  form.setAttribute("data-current-product", id);
 
   const product = productsStore.find((p) => p.id === Number(id));
 
@@ -63,15 +66,34 @@ const fillInputs = (e) => {
   descriptionInput.value = product.description;
 };
 
-window.onload = () => {
-  isLoading = true;
+const updateProduct = async (e) => {
+  e.preventDefault();
+  const id = form.getAttribute("data-current-product");
+  const newProduct = {
+    title: titleInput.value,
+    price: priceInput.value,
+    category: categoryInput.value,
+    description: descriptionInput.value,
+  };
+  fetch(window.origin + "/api/products/" + id, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(newProduct),
+  })
+    .then((res) => res.json())
+    .then((res) => console.log(res));
+};
 
+window.onload = () => {
   getAllProducts() // Fetch Products from BE //! Function defined in index.js
-    .then((data) => displayProducts(data))
+    .then((data) => displayProducts(data)) //display all the products
     .then(() => {
       const productCards = document.querySelectorAll(".grid-item");
       productCards.forEach((card) =>
         card.addEventListener("click", fillInputs)
       );
     });
+  updateButton.addEventListener("click", updateProduct);
 };
