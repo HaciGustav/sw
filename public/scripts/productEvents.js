@@ -102,5 +102,8 @@ export const checkoutProducts = (user) => {
     }),
   })
     .then((res) => res.json())
-    .then((res) => console.log(res));
+    .then((res) => {
+      console.log(res);
+      localStorage.removeItem(cart);
+    });
 };
