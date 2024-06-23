@@ -84,8 +84,15 @@ const getProductsByFilter = async (req, res) => {
 //* CREATE PRODUCT
 const createProduct = async (req, res) => {
   try {
-    const { title, description, price, images, category, tags, isIllegal } =
-      req.body;
+    const {
+      title,
+      description,
+      price,
+      images,
+      category,
+      tags,
+      isIllegal = false,
+    } = req.body;
 
     // Check if a product with the given name already exists
     // Check if required fields are present
@@ -145,8 +152,16 @@ const createProduct = async (req, res) => {
 //* UPDATE PRODUCT
 const updateProduct = async (req, res) => {
   try {
-    const { title, description, price, images, category, isIllegal, id, tags } =
-      req.body;
+    const {
+      title,
+      description,
+      price,
+      images,
+      category,
+      isIllegal = false,
+      id,
+      tags,
+    } = req.body;
 
     // Check for missing fields
     if (

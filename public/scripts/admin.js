@@ -7,8 +7,13 @@ const form = document.querySelector("form");
 const titleInput = document.querySelector("#product-title");
 const priceInput = document.querySelector("#product-price");
 const categoryInput = document.querySelector("#product-category");
+const tagsInput = document.querySelector("#product-tags");
+const imageInput = document.querySelector("#product-image");
 const descriptionInput = document.querySelector("#product-description");
+
+const createButton = document.querySelector("#create-btn");
 const updateButton = document.querySelector("#update-btn");
+const modifyButton = document.querySelector("#modify-btn");
 const deleteButton = document.querySelector("#delete-btn");
 
 const displayProducts = (products) => {
@@ -63,27 +68,117 @@ const fillInputs = (e) => {
   titleInput.value = product.title;
   priceInput.value = product.price;
   categoryInput.value = product.category;
+  tagsInput.value = product.tags.join(" | ");
+  imageInput.value = product.images[0];
   descriptionInput.value = product.description;
 };
 
-const updateProduct = async (e) => {
+const createProduct = async (e) => {
+  e.preventDefault();
+  const inputs = form.querySelectorAll("input");
+  let isInputEmpty = false;
+  inputs.forEach((input) => {
+    if (!input.value) {
+      alert(`${input.name} field is required`);
+      isInputEmpty = true;
+    }
+  });
+  if (isInputEmpty) return;
+  const data = {
+    title: titleInput.value,
+    price: priceInput.value,
+    category: categoryInput.value,
+    tags: tagsInput.value.split("|"),
+    images: [imageInput.value],
+    description: descriptionInput.value,
+  };
+  console.log(data);
+  fetch(window.origin + "/api/products", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      alert("Product successfully created!");
+      location.reload();
+    });
+};
+
+const modifyProduct = async (e) => {
   e.preventDefault();
   const id = form.getAttribute("data-current-product");
-  const newProduct = {
+  /*   const newProduct = {
     title: titleInput.value,
     price: priceInput.value,
     category: categoryInput.value,
     description: descriptionInput.value,
-  };
+  }; */
+  const productData = {};
+  const inputs = form.querySelectorAll("input");
+  inputs.forEach((input) => {
+    if (input.value) {
+      if (input.name === "images") {
+        productData[input.name] = [input.value];
+      } else if (input.name === "tags") {
+        productData[input.name] = input.value.split("|");
+      } else {
+        productData[input.name] = input.value;
+      }
+    }
+  });
+  console.log(productData);
   fetch(window.origin + "/api/products/" + id, {
     method: "PATCH",
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify(newProduct),
+    body: JSON.stringify(productData),
   })
     .then((res) => res.json())
-    .then((res) => console.log(res));
+    .then((res) => {
+      console.log(res);
+      location.reload();
+    });
+};
+
+const updateProduct = async (e) => {
+  e.preventDefault();
+  const inputs = form.querySelectorAll("input");
+  let isInputEmpty = false;
+  inputs.forEach((input) => {
+    if (!input.value) {
+      alert(`${input.name} field is required`);
+      isInputEmpty = true;
+    }
+  });
+  if (isInputEmpty) return;
+
+  const id = form.getAttribute("data-current-product");
+  const productData = {
+    id: id,
+    title: titleInput.value,
+    price: priceInput.value,
+    category: categoryInput.value,
+    tags: tagsInput.value.split("|"),
+    images: [imageInput.value],
+    description: descriptionInput.value,
+  };
+  fetch(window.origin + "/api/products/", {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(productData),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      alert("Product successfully updated");
+      console.log(res);
+      location.reload();
+    });
 };
 
 const deleteProduct = () => {
@@ -95,7 +190,10 @@ const deleteProduct = () => {
     },
   })
     .then((res) => res.json())
-    .then((res) => console.log(res));
+    .then((res) => {
+      console.log(res);
+      location.reload();
+    });
 };
 
 window.onload = () => {
@@ -107,7 +205,8 @@ window.onload = () => {
         card.addEventListener("click", fillInputs)
       );
     });
-
+  createButton.addEventListener("click", createProduct);
   updateButton.addEventListener("click", updateProduct);
+  modifyButton.addEventListener("click", modifyProduct);
   deleteButton.addEventListener("click", deleteProduct);
 };
