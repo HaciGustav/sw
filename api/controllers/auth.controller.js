@@ -150,7 +150,7 @@ const authenticateJWT = (req, res, next) => {
 
 // Logout User
 const logoutUser = (req, res) => {
-  res.clearCookie().send("Logged out successfully");
+  res.clearCookie("token").clearCookie("user").send("Logged out successfully");
 };
 
 const auth = {

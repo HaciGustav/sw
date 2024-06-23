@@ -16,11 +16,7 @@
   <body>
     <div id="login" popover>
       <div class="form_container">
-        <form
-          class="form"
-          id="login-form"
-          onsubmit="validate_login(event)"
-        >
+        <form class="form" id="login-form">
           <div class="bg-image-2"></div>
           <h2>Login</h2>
           <input name="email" type="text" placeholder="email" required />
@@ -39,11 +35,7 @@
     </div>
     <div id="register" popover>
       <div class="form_container">
-        <form
-          class="form"
-          id="register-form"
-          onsubmit="validate_register(event)"
-        >
+        <form class="form" id="register-form">
           <div class="bg-image-2"></div>
           <h2>Sign-Up</h2>
           <input name="email" type="text" placeholder="email" required />
@@ -82,8 +74,11 @@
             <i class="fa-solid fa-cart-shopping"></i>
           </button>
         </li>
-        <li><button popovertarget="login">Login</button></li>
-        <li><img id="user_img" src=""></li>
+        <li id="logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </li>
+        <li id="login-btn"><button popovertarget="login">Login</button></li>
+        <li><img id="user_img" src="" /></li>
       </ul>
     </nav>
 

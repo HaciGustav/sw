@@ -22,6 +22,9 @@ const productsStore = [];
 const scrollers = document.querySelectorAll(".h-scroll-container");
 const login_popover = document.querySelector("#login");
 const register_popover = document.querySelector("#register");
+const loginButton = document.querySelector("#login-btn");
+const logoutButton = document.querySelector("#logout-btn");
+const userImg = document.querySelector("#user_img");
 
 if (!window.matchMedia("(prefers-reduces-motion: reduced)").matches) {
   initAnimations();
@@ -29,15 +32,20 @@ if (!window.matchMedia("(prefers-reduces-motion: reduced)").matches) {
 
 const createAvatar = (name) => {
   const img = document.querySelector("#user_img");
+  if (!name) {
+    userImg.style.display = "none";
+    return;
+  }
+  userImg.style.display = "block";
   const url = `https://robohash.org/${name}?size=200x200`;
   fetch(url)
     .then((response) => response.blob())
     .then((blob) => {
-      img.src = URL.createObjectURL(blob);
+      userImg.src = URL.createObjectURL(blob);
     })
     .catch((err) => {
       console.log(err);
-      img.src = "https://robohash.org/default";
+      userImg.src = "https://robohash.org/default";
     });
 };
 
@@ -136,7 +144,7 @@ function validate_login(e) {
     return false;
   }
   login();
-};
+}
 
 const validate_register = (e) => {
   e.preventDefault();
@@ -160,7 +168,9 @@ const validate_register = (e) => {
   register();
 };
 
-const login = () => {
+const login = (e) => {
+  e.preventDefault();
+
   fetch("/api/auth/login", {
     method: "POST",
     headers: {
@@ -170,18 +180,23 @@ const login = () => {
       email: document.forms["login-form"]["email"].value,
       password: document.forms["login-form"]["password"].value,
     }),
-  }).then((response) => {
-    console.log(response);
-    if (!response.ok) {
-      alert("The login attempt has failed!");
-    } else {
-      login_popover.hidePopover();
-      createAvatar(getUserCred()?.firstname);
-    }
-  }).catch(error => console.error(error));
+  })
+    .then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        alert("The login attempt has failed!");
+      } else {
+        login_popover.hidePopover();
+        createAvatar(getUserCred()?.firstname);
+        loginButton.style.display = "none";
+        logoutButton.style.display = "block";
+      }
+    })
+    .catch((error) => console.error(error));
 };
 
-const register = () => {
+const register = (e) => {
+  e.preventDefault();
   fetch("/api/auth/register", {
     method: "POST",
     headers: {
@@ -198,17 +213,34 @@ const register = () => {
     .then((response) => {
       if (response.ok) {
         register_popover.hidePopover();
-        document.forms["login-form"]["email"].value = document.forms["register-form"]["email"].value;
-        document.forms["login-form"]["password"].value = document.forms["register-form"]["password"].value;
-        login();
-      }
-      else {
+        document.forms["login-form"]["email"].value =
+          document.forms["register-form"]["email"].value;
+        document.forms["login-form"]["password"].value =
+          document.forms["register-form"]["password"].value;
+        login(e);
+      } else {
         alert("The signup attempt has failed!");
       }
     })
     .catch((error) => {
+      console.log(error);
       alert("There has been an error!");
     });
+};
+
+const logout = (e) => {
+  fetch("/api/auth/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      loginButton.style.display = "block";
+      logoutButton.style.display = "none";
+      userImg.style.display = "none";
+    }
+  });
 };
 
 export const getAllProducts = async () => {
@@ -227,21 +259,23 @@ const displayProducts = (products) => {
   products.forEach((product, index) => {
     productsStore.push(product);
     grid.innerHTML += `
-            <button popovertarget="product_${index}" data-product-id= ${product.id
-      }>
+            <button popovertarget="product_${index}" data-product-id= ${
+      product.id
+    }>
                 <div class="grid-item grid-item-xl">
                     <img src="${product.images[0]}" alt="${product.title}">
                     <div class="overlay">${product.title}</div>
                 </div>
                 <div id="product_${index}" class="product_popover" popover>
                 <span class="close-popover" >X</span>
-                 <img src=${product.images[0]
-      } alt="Product Image" class="product-img" />
+                 <img src=${
+                   product.images[0]
+                 } alt="Product Image" class="product-img" />
                 <div class="product-details">
                   <div class="product-tags">
                   ${product.tags
-        .map((tag) => `<span class="tag">${tag}</span>`)
-        .join("")}
+                    .map((tag) => `<span class="tag">${tag}</span>`)
+                    .join("")}
                   </div>
                   <h2 class="product-title">Product Title</h2>
                   <p class="product-price">
@@ -251,8 +285,9 @@ const displayProducts = (products) => {
                   <p class="product-description">
                   ${product.description}
                   </p>
-                   <span class="add-to-cart" data-product-id=${product.id
-      }>Add to Cart</span>
+                   <span class="add-to-cart" data-product-id=${
+                     product.id
+                   }>Add to Cart</span>
                 </div>
                 </div>
             </button>
@@ -270,7 +305,6 @@ window.onload = () => {
     .then((data) => displayProducts(data))
     .then(() => {
       const addToCartButtons = document.querySelectorAll(".add-to-cart");
-      console.log(addToCartButtons);
       addToCartButtons.forEach((btn) => {
         btn.addEventListener("click", addToCart);
       });
@@ -279,6 +313,22 @@ window.onload = () => {
   const cartBtn = document.querySelector("#shopping-cart");
   cartBtn.addEventListener("click", () => displayCartContent(productsStore));
 
+  const loginForm = document.querySelector("#login-form");
+  loginForm.addEventListener("submit", login);
+
+  const registerForm = document.querySelector("#register-form");
+  registerForm.addEventListener("submit", register);
+
+  logoutButton.addEventListener("click", logout);
+
   const user = getUserCred();
   createAvatar(user?.firstname);
+  console.log(user);
+  if (user) {
+    loginButton.style.display = "none";
+    logoutButton.style.display = "block";
+  } else {
+    loginButton.style.display = "block";
+    logoutButton.style.display = "none";
+  }
 };
