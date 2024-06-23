@@ -243,6 +243,12 @@ const logout = (e) => {
   });
 };
 
+const navigateToAdminPage = () => {
+  const user = getUserCred();
+  if (user.isAdmin) window.location.href = "/admin.html";
+  else return;
+};
+
 export const getAllProducts = async () => {
   const data = await fetch("/api/products").then((resp) => {
     if (!resp.ok) {
@@ -321,10 +327,13 @@ window.onload = () => {
 
   logoutButton.addEventListener("click", logout);
 
+  userImg.addEventListener("click", navigateToAdminPage);
+
   const user = getUserCred();
   createAvatar(user?.firstname);
-  console.log(user);
+
   if (user) {
+    console.log(user);
     loginButton.style.display = "none";
     logoutButton.style.display = "block";
   } else {

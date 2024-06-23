@@ -86,6 +86,18 @@ const updateProduct = async (e) => {
     .then((res) => console.log(res));
 };
 
+const deleteProduct = () => {
+  const id = form.getAttribute("data-current-product");
+  fetch(window.origin + "/api/products/" + id, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => console.log(res));
+};
+
 window.onload = () => {
   getAllProducts() // Fetch Products from BE //! Function defined in index.js
     .then((data) => displayProducts(data)) //display all the products
@@ -95,5 +107,7 @@ window.onload = () => {
         card.addEventListener("click", fillInputs)
       );
     });
+
   updateButton.addEventListener("click", updateProduct);
+  deleteButton.addEventListener("click", deleteProduct);
 };

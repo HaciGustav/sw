@@ -24,8 +24,6 @@ const login = async (req, res) => {
       expiresIn: tokenExpiresIn,
     });
 
-    const avatar = await getAvatar(user.firstname, user.lastname);
-    console.log(avatar);
     res.cookie(
       "user",
       {
@@ -33,7 +31,7 @@ const login = async (req, res) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
-        // avatar,
+        isAdmin: user?.isAdmin || false,
         cart: user.cart,
       },
       { httpOnly: false }
@@ -47,7 +45,6 @@ const login = async (req, res) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
-        avatar: avatar,
         token: token,
         cart: user.cart,
       });

@@ -299,7 +299,7 @@ div:has(.form_container) {
   background-color: #00cb00;
 }
 
-#cart-container {
+.cart-content {
   display: flex;
   flex-direction: column;
   row-gap: 5px;

@@ -29,7 +29,7 @@ export const addToCart = (e) => {
  */
 
 export const displayCartContent = async (productStore) => {
-  const cartContainer = document.getElementById("cart-container");
+  const cartContainer = document.querySelector(".cart-content");
 
   const cartContent = JSON.parse(localStorage.getItem("cart"));
   console.log(cartContent);

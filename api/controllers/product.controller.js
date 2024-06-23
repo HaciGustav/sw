@@ -203,7 +203,7 @@ const deleteProduct = async (req, res) => {
     }
 
     // Check if the product exists
-    const product = await Product.findOne({ id }).select("-_id -__v");
+    const product = await Product.findOne({ id });
     if (!product) {
       return res.status(404).send("Product not found with the given ID");
     }
@@ -230,7 +230,7 @@ const modifyProduct = async (req, res) => {
       return res.status(204).send("No Content given");
     }
 
-    const product = await Product.findOne({ id: id }).select("-_id -__v");
+    const product = await Product.findOne({ id: id });
     if (!product) {
       return res.status(404).send("Product not found with the given ID");
     }
