@@ -21,15 +21,17 @@ const productsStore = [];
 let isLoading = false;
 
 const scrollers = document.querySelectorAll(".h-scroll-container");
+const login_popover = document.querySelector("#login");
+const register_popover = document.querySelector("#register");
 
 if (!window.matchMedia("(prefers-reduces-motion: reduced)").matches) {
   initAnimations();
 }
 
-const createAvatar = async (name) => {
-  const img = document.createElement("img");
+const createAvatar = (name) => {
+  const img = document.querySelector("#user_img");
   const url = `https://robohash.org/${name}?size=200x200`;
-  await fetch(url)
+  fetch(url)
     .then((response) => response.blob())
     .then((blob) => {
       img.src = URL.createObjectURL(blob);
@@ -38,7 +40,6 @@ const createAvatar = async (name) => {
       console.log(err);
       img.src = "https://robohash.org/default";
     });
-  document.querySelector("nav ul").appendChild(img);
 };
 
 const getUserCred = () => {
@@ -126,7 +127,8 @@ async function purchaseProduct(userId, productId) {
 
 // FORMS
 
-const validate_login = () => {
+function validate_login(e) {
+  e.preventDefault();
   if (
     document.forms["login-form"]["email"].value === "" ||
     document.forms["login-form"]["password"].value === ""
@@ -134,9 +136,11 @@ const validate_login = () => {
     alert("Please fill in all fields");
     return false;
   }
+  login();
 };
 
-const validate_register = () => {
+const validate_register = (e) => {
+  e.preventDefault();
   if (
     document.forms["register-form"]["email"].value === "" ||
     document.forms["register-form"]["password"].value === "" ||
@@ -154,34 +158,11 @@ const validate_register = () => {
     alert("The passwords do not match!");
     return false;
   }
+  register();
 };
 
-const login = async () => {
-  try {
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: document.forms["login-form"]["email"].value,
-        password: document.forms["login-form"]["password"].value,
-      }),
-    }).then((response) => {
-      // console.log(response);
-      if (!response.ok) {
-        alert("The login attempt has failed!");
-      } else {
-        return response.json();
-      }
-    });
-
-    createAvatar(res.firstname);
-  } catch (error) {
-    console.error(error);
-  }
-
-  /*   const res = await fetch("/api/auth/login", {
+const login = () => {
+  fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -190,20 +171,15 @@ const login = async () => {
       email: document.forms["login-form"]["email"].value,
       password: document.forms["login-form"]["password"].value,
     }),
-  })
-    .then((response) => {
-      // console.log(response);
-      if (!response.ok) {
-        alert("The login attempt has failed!");
-      } else {
-        return response.json();
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("There has been an error!");
-    });
- */
+  }).then((response) => {
+    // console.log(response);
+    if (!response.ok) {
+      alert("The login attempt has failed!");
+    } else {
+      login_popover.hidePopover();
+      createAvatar(getUserCred()?.firstname);
+    }
+  }).catch(error => console.error(error));
 };
 
 const register = () => {
@@ -221,13 +197,17 @@ const register = () => {
     }),
   })
     .then((response) => {
-      console.log(response);
-      if (!response.ok) {
+      if (response.ok) {
+        register_popover.hidePopover();
+        document.forms["login-form"]["email"].value = document.forms["register-form"]["email"].value;
+        document.forms["login-form"]["password"].value = document.forms["register-form"]["password"].value;
+        login();
+      }
+      else {
         alert("The signup attempt has failed!");
       }
     })
     .catch((error) => {
-      console.error(error);
       alert("There has been an error!");
     });
 };
@@ -248,23 +228,21 @@ const displayProducts = (products) => {
   products.forEach((product, index) => {
     productsStore.push(product);
     grid.innerHTML += `
-            <button popovertarget="product_${index}" data-product-id= ${
-      product.id
-    }>
+            <button popovertarget="product_${index}" data-product-id= ${product.id
+      }>
                 <div class="grid-item grid-item-xl">
                     <img src="${product.images[0]}" alt="${product.title}">
                     <div class="overlay">${product.title}</div>
                 </div>
                 <div id="product_${index}" class="product_popover" popover>
                 <span class="close-popover" >X</span>
-                 <img src=${
-                   product.images[0]
-                 } alt="Product Image" class="product-img" />
+                 <img src=${product.images[0]
+      } alt="Product Image" class="product-img" />
                 <div class="product-details">
                   <div class="product-tags">
                   ${product.tags
-                    .map((tag) => `<span class="tag">${tag}</span>`)
-                    .join("")}
+        .map((tag) => `<span class="tag">${tag}</span>`)
+        .join("")}
                   </div>
                   <h2 class="product-title">Product Title</h2>
                   <p class="product-price">
@@ -274,9 +252,8 @@ const displayProducts = (products) => {
                   <p class="product-description">
                   ${product.description}
                   </p>
-                   <span class="add-to-cart" data-product-id=${
-                     product.id
-                   }>Add to Cart</span>
+                   <span class="add-to-cart" data-product-id=${product.id
+      }>Add to Cart</span>
                 </div>
                 </div>
             </button>

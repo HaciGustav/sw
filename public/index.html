@@ -11,16 +11,15 @@
     />
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/popover.css" />
+    <script src="scripts/index.js" type="module"></script>
   </head>
-
   <body>
     <div id="login" popover>
       <div class="form_container">
         <form
           class="form"
           id="login-form"
-          action="javascript:login()"
-          onsubmit="validate_login()"
+          onsubmit="validate_login(event)"
         >
           <div class="bg-image-2"></div>
           <h2>Login</h2>
@@ -43,8 +42,7 @@
         <form
           class="form"
           id="register-form"
-          action="javascript:register()"
-          onsubmit="validate_register()"
+          onsubmit="validate_register(event)"
         >
           <div class="bg-image-2"></div>
           <h2>Sign-Up</h2>
@@ -82,6 +80,7 @@
           <a href="#scroll"><i class="fa-solid fa-cart-shopping"></i></a>
         </li>
         <li><button popovertarget="login">Login</button></li>
+        <li><img id="user_img" src=""></li>
       </ul>
     </nav>
 
@@ -95,5 +94,4 @@
       <div class="grid-container"></div>
     </section>
   </body>
-  <script defer src="scripts/index.js" type="module"></script>
 </html>
