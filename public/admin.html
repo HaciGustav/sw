@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="./styles/admin.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Admin Panel</h1>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Products</a></li>
+        </ul>
+      </nav>
+      <main>
+        <section id="products">
+          <h2>Manage Products</h2>
+          <form id="product-form">
+            <label for="product-title">Title:</label>
+            <input type="text" id="product-title" name="title" required />
+
+            <label for="product-price">Price (USD):</label>
+            <input type="number" id="product-price" name="price" required />
+
+            <label for="product-category">Category:</label>
+            <input id="product-category" name="category" required />
+
+            <label for="product-description">Description:</label>
+            <input id="product-description" name="description" required />
+
+            <div class="btn-container">
+              <button id="update">Update Product</button>
+              <button id="delete">Delete Product</button>
+            </div>
+          </form>
+
+          <div class="grid-container">
+            <!-- Dynamic Product List -->
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./scripts/admin.js"></script>
+  </body>
+</html>
