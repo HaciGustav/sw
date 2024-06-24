@@ -304,5 +304,67 @@ div:has(.form_container) {
   flex-direction: column;
   row-gap: 5px;
 }
+/* Hamburger menu styles */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+}
 
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; 
+  width: 250px;
+  height: 100%;
+  background-color: #040614;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+  overflow-x: hidden;
+  transition: right 0.3s ease;
+  z-index: 100; 
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar ul li {
+  padding: 20px 0;
+  color: white;
+}
+
+.sidebar a{
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    display: none;
+  }
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+.sidebar.active {
+  right: 0; 
+}
 /*# sourceMappingURL=index.css.map */
