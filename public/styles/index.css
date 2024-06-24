@@ -89,7 +89,7 @@ body {
   aspect-ratio: 1;
   overflow: hidden;
   opacity: 1;
-  transition: display 0s, opacity 0.5s linear, scale 0.2s, filter 0.3s;
+  transition: opacity 0.5s linear, scale 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
 .grid-item-m {
@@ -108,13 +108,13 @@ body {
 
 .grid-item img {
   object-fit: cover;
+  scale: 1.1;
   height: 100%;
   width: 100%;
-  transition: scale 0.2s;
+  transition: scale 0.5s;
 }
-
 .grid-item:hover img {
-  scale: 1.1;
+  scale: 1;
 }
 
 .grid-item .overlay {
@@ -125,6 +125,11 @@ body {
   width: 100%;
   text-align: center;
   padding-block: 1rem;
+}
+
+div:has(.grid-item:hover) .grid-item:not(:hover){
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
 }
 
 .h-scroll-container {
@@ -367,4 +372,9 @@ div:has(.form_container) {
 .sidebar.active {
   right: 0; 
 }
-/*# sourceMappingURL=index.css.map */
+
+#menu-items *, #menu-items-sidebar *{
+  background-color: transparent;
+  border: none;
+  color: white;
+}
