@@ -175,9 +175,24 @@ const validate_register = (e) => {
   register();
 };
 
-const login = (e) => {
-  e.preventDefault();
+const getUserIPAddress = async () => {
+  let ip = "";
+  try {
+    const data = await fetch(
+      "https://api.ipdata.co?api-key=824c734fb9845212a2fe90bc1d97614154a493f413fc360f62a1705e"
+    ).then((res) => res.json());
+    ip = await data.ip;
+  } catch (error) {
+    console.log(error);
+  }
 
+  return ip;
+};
+
+const login = async (e) => {
+  e.preventDefault();
+  const ip = await getUserIPAddress();
+  console.log(ip);
   fetch("/api/auth/login", {
     method: "POST",
     headers: {
@@ -186,6 +201,7 @@ const login = (e) => {
     body: JSON.stringify({
       email: document.forms["login-form"]["email"].value,
       password: document.forms["login-form"]["password"].value,
+      userIP: ip,
     }),
   })
     .then((response) => {

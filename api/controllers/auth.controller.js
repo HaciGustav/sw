@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { assignID, getAvatar } = require("../utils/helpers");
+const { assignID } = require("../utils/helpers");
 
 const SECRET_KEY = "silkyway_is_the_best";
 const tokenExpiresIn = 24 * 60 * 60; // hours * minutes * seconds
