@@ -1,25 +1,25 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { assignID, getAvatar } = require("../utils/helpers");
-const request = require('request');
-require('dotenv').config();
+const { assignID } = require("../utils/helpers");
+const request = require("request");
+require("dotenv").config();
 
 const SECRET_KEY = "silkyway_is_the_best";
 const tokenExpiresIn = 24 * 60 * 60; // hours * minutes * seconds
 
 async function getLocation() {
-    return new Promise((resolve, reject) => {
-        request('http://ip-api.com/json', (err, resp) => {
-            if (err) {
-                console.log(err.message);
-                return reject(err);
-            } else {
-                const ipinfo = JSON.parse(resp.body);
-                resolve({ city: ipinfo.city, country: ipinfo.country });
-            }
-        });
+  return new Promise((resolve, reject) => {
+    request("http://ip-api.com/json", (err, resp) => {
+      if (err) {
+        console.log(err.message);
+        return reject(err);
+      } else {
+        const ipinfo = JSON.parse(resp.body);
+        resolve({ city: ipinfo.city, country: ipinfo.country });
+      }
     });
+  });
 }
 
 const login = async (req, res) => {
@@ -49,14 +49,14 @@ const login = async (req, res) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
-        isAdmin: user?.isAdmin || false,
+        isAdmin: user.isAdmin || false,
         cart: user.cart,
         city: location.city, // Add city here
         country: location.country, // Add country here
       },
       { httpOnly: false }
     );
-
+    console.log("TEST===>", user.isAdmin);
     res
       .status(200)
       .cookie("token", token, { httpOnly: true, secure: true }) // Set token in cookie
@@ -116,6 +116,7 @@ const register = async (req, res) => {
         firstname: newUser.firstname,
         lastname: newUser.lastname,
         email: newUser.email,
+        isAdmin: user.isAdmin || false,
         cart: newUser.cart,
         city: location.city, // Add city here
         country: location.country, // Add country here

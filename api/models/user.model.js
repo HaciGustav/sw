@@ -34,7 +34,7 @@ const UserModel = new Schema(
     },
     isAdmin: {
       type: Boolean,
-      default: true,
+      default: false,
       required: true,
     },
     cart: {

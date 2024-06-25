@@ -73,14 +73,13 @@ const getUserCred = () => {
   if (!cookies) {
     return null;
   }
-  const userCookie = cookies.split('; ').find(row => row.startsWith('user='));
-  if (!userCookie) {
-    return null;
-  }
-  const user = JSON.parse(userCookie.substring(5));
+  // const userCookie = cookies.split("; ").find((row) => row.startsWith("user="));
+  // if (!userCookie) {
+  //   return null;
+  // }
+  const user = JSON.parse(cookies.substring(7));
   return user;
 };
-
 
 function initAnimations() {
   scrollers.forEach((scroller) => {
@@ -208,8 +207,7 @@ const login = (e) => {
       if (!response.ok) {
         alert("The login attempt has failed!");
       } else {
-        response.json().then(userData => {
-          document.cookie = `user=j:${encodeURIComponent(JSON.stringify(userData))}`;
+        response.json().then((userData) => {
           login_popover.hidePopover();
           createAvatar(userData.firstname);
           loginButton.style.display = "none";
@@ -275,6 +273,7 @@ const logout = (e) => {
 
 const navigateToAdminPage = () => {
   const user = getUserCred();
+  console.log(user);
   if (user.isAdmin) window.location.href = "/admin.html";
   else return;
 };
@@ -376,9 +375,9 @@ window.onload = () => {
 };
 
 const displayUserInfo = (user) => {
-  const userInfoContainer = document.querySelector('#user_info');
+  const userInfoContainer = document.querySelector("#user_info");
   userInfoContainer.innerHTML = `
     <p>Location: ${user.city}, ${user.country}</p>
   `;
-  userInfoContainer.style.display = 'block';
+  userInfoContainer.style.display = "block";
 };
