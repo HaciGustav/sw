@@ -286,6 +286,7 @@ export const getAllProducts = async () => {
     return resp.json();
   });
   return data;
+  return data;
 };
 
 const displayProducts = (products) => {
@@ -375,9 +376,5 @@ window.onload = () => {
 };
 
 const displayUserInfo = (user) => {
-  const userInfoContainer = document.querySelector("#user_info");
-  userInfoContainer.innerHTML = `
-    <p>Location: ${user.city}, ${user.country}</p>
-  `;
-  userInfoContainer.style.display = "block";
+  document.querySelector("#user_info").innerHTML = `SilkyWay ${user.country}`;
 };

@@ -8,9 +8,10 @@ require("dotenv").config();
 const SECRET_KEY = "silkyway_is_the_best";
 const tokenExpiresIn = 24 * 60 * 60; // hours * minutes * seconds
 
-async function getLocation() {
+async function getLocation(ip) {
   return new Promise((resolve, reject) => {
-    request("http://ip-api.com/json", (err, resp) => {
+    console.log(`IP: ${ip}`);
+    request("http://ip-api.com/json/"+ip, (err, resp) => {
       if (err) {
         console.log(err.message);
         return reject(err);
@@ -40,7 +41,7 @@ const login = async (req, res) => {
       expiresIn: tokenExpiresIn,
     });
 
-    const location = await getLocation();
+    const location = await getLocation(req.ip);
 
     res.cookie(
       "user",
@@ -56,7 +57,7 @@ const login = async (req, res) => {
       },
       { httpOnly: false }
     );
-    console.log("TEST===>", user.isAdmin);
+    console.log("TEST===>", location);
     res
       .status(200)
       .cookie("token", token, { httpOnly: true, secure: true }) // Set token in cookie
@@ -108,7 +109,7 @@ const register = async (req, res) => {
       }
     );
 
-    const location = await getLocation();
+    const location = await getLocation(req.ip);
 
     res.cookie(
       "user",

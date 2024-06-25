@@ -22,6 +22,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 app.use(express.static("./public"));
+app.enable('trust proxy');
 app.use("*.css", (req, res, next) => {
   res.set("Content-Type", "text/css");
   next();
@@ -63,7 +64,7 @@ app.use("/api", router);
 
 connectDB();
 
-app.listen(PORT, () => {
+app.listen(PORT, host="0.0.0.0", () => {
   console.log(`Server is running on http://localhost:${PORT}/ `);
 });
 

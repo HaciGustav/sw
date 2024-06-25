@@ -113,7 +113,7 @@ const createPurchaseMail = (user, products) => {
           })
           .join("")}
         <div class="footer">
-            <p>If you have any questions, feel free to contact our support team.</p>
+            <p>If you have any questions, psl don't contact our support team.</p>
             <p>&copy; 2024 Your SilkyWay</p>
         </div>
     </div>
