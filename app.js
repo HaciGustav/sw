@@ -52,6 +52,12 @@ router.get("/categories", category.getCategories);
 
 router.post("/categories", category.createCategory);
 
+// GET XML :D
+app.get("/xml", (req, res) => {
+  res.set("Content-Type", "text/xml");
+  res.send("<p>Ich wurde via XML eingefügt :)</p>");
+})
+
 // app.get("/", (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
 //SWAGGER

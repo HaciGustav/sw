@@ -346,6 +346,12 @@ window.onload = () => {
       });
     });
 
+  fetch("/xml")
+  .then(resp => resp.text())
+  .then(data => {
+    document.querySelector("#xml").innerHTML = data;
+  });
+
   const cartBtn = document.querySelector("#shopping-cart");
   cartBtn.addEventListener("click", displayCartContent);
 
