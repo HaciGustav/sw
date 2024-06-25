@@ -58,14 +58,17 @@ const createAvatar = (name) => {
 
 const getUserCred = () => {
   const cookies = decodeURIComponent(document.cookie);
-
   if (!cookies) {
-    return;
+    return null;
   }
-
-  const user = JSON.parse(cookies.substring(7));
+  const userCookie = cookies.split('; ').find(row => row.startsWith('user='));
+  if (!userCookie) {
+    return null;
+  }
+  const user = JSON.parse(userCookie.substring(5));
   return user;
 };
+
 
 function initAnimations() {
   scrollers.forEach((scroller) => {
@@ -193,10 +196,14 @@ const login = (e) => {
       if (!response.ok) {
         alert("The login attempt has failed!");
       } else {
-        login_popover.hidePopover();
-        createAvatar(getUserCred()?.firstname);
-        loginButton.style.display = "none";
-        logoutButton.style.display = "block";
+        response.json().then(userData => {
+          document.cookie = `user=j:${encodeURIComponent(JSON.stringify(userData))}`;
+          login_popover.hidePopover();
+          createAvatar(userData.firstname);
+          loginButton.style.display = "none";
+          logoutButton.style.display = "block";
+          displayUserInfo(userData); // Display user info including city and country
+        });
       }
     })
     .catch((error) => console.error(error));
@@ -345,8 +352,17 @@ window.onload = () => {
     console.log(user);
     loginButton.style.display = "none";
     logoutButton.style.display = "block";
+    displayUserInfo(user); // Display user info including city and country
   } else {
     loginButton.style.display = "block";
     logoutButton.style.display = "none";
   }
+};
+
+const displayUserInfo = (user) => {
+  const userInfoContainer = document.querySelector('#user_info');
+  userInfoContainer.innerHTML = `
+    <p>Location: ${user.city}, ${user.country}</p>
+  `;
+  userInfoContainer.style.display = 'block';
 };

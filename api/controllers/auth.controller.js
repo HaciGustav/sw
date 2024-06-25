@@ -2,9 +2,25 @@ const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { assignID, getAvatar } = require("../utils/helpers");
+const request = require('request');
+require('dotenv').config();
 
 const SECRET_KEY = "silkyway_is_the_best";
 const tokenExpiresIn = 24 * 60 * 60; // hours * minutes * seconds
+
+async function getLocation() {
+    return new Promise((resolve, reject) => {
+        request('http://ip-api.com/json', (err, resp) => {
+            if (err) {
+                console.log(err.message);
+                return reject(err);
+            } else {
+                const ipinfo = JSON.parse(resp.body);
+                resolve({ city: ipinfo.city, country: ipinfo.country });
+            }
+        });
+    });
+}
 
 const login = async (req, res) => {
   try {
@@ -24,6 +40,8 @@ const login = async (req, res) => {
       expiresIn: tokenExpiresIn,
     });
 
+    const location = await getLocation();
+
     res.cookie(
       "user",
       {
@@ -33,6 +51,8 @@ const login = async (req, res) => {
         email: user.email,
         isAdmin: user?.isAdmin || false,
         cart: user.cart,
+        city: location.city, // Add city here
+        country: location.country, // Add country here
       },
       { httpOnly: false }
     );
@@ -47,6 +67,8 @@ const login = async (req, res) => {
         email: user.email,
         token: token,
         cart: user.cart,
+        city: location.city, // Add city here
+        country: location.country, // Add country here
       });
   } catch (error) {
     console.log(error);
@@ -85,6 +107,8 @@ const register = async (req, res) => {
       }
     );
 
+    const location = await getLocation();
+
     res.cookie(
       "user",
       {
@@ -93,6 +117,8 @@ const register = async (req, res) => {
         lastname: newUser.lastname,
         email: newUser.email,
         cart: newUser.cart,
+        city: location.city, // Add city here
+        country: location.country, // Add country here
       },
       { httpOnly: false }
     );
@@ -107,6 +133,8 @@ const register = async (req, res) => {
         token: token,
         email: newUser.email,
         cart: newUser.cart,
+        city: location.city, // Add city here
+        country: location.country, // Add country here
       });
   } catch (error) {
     console.log(error);
@@ -131,7 +159,6 @@ const checkToken = (req, res) => {
   }
 };
 
-// Middleware to authenticate JWT from cookies
 const authenticateJWT = (req, res, next) => {
   const token = req.cookies.token;
   console.log(token);
@@ -145,7 +172,6 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
-// Logout User
 const logoutUser = (req, res) => {
   res.clearCookie("token").clearCookie("user").send("Logged out successfully");
 };
