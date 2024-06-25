@@ -78,7 +78,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { email, password, firstname, lastname, address } = req.body;
+    const { email, password, firstname, lastname, address, isAdmin } = req.body;
     const user = await User.findOne({ email }).exec();
     if (user) {
       res.status(400).send("The email address is already in use");
@@ -91,6 +91,7 @@ const register = async (req, res) => {
       email,
       password: hashedPassword,
       firstname,
+      isAdmin,
       lastname,
       address,
     });

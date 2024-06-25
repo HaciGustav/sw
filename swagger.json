@@ -574,6 +574,10 @@
           "lastname": {
             "type": "string",
             "example": "doe"
+          },
+          "isAdmin": {
+            "type": "boolean",
+            "example": "false"
           }
         }
       }
