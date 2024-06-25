@@ -324,7 +324,7 @@ window.onload = () => {
     });
 
   const cartBtn = document.querySelector("#shopping-cart");
-  cartBtn.addEventListener("click", () => displayCartContent(productsStore));
+  cartBtn.addEventListener("click", displayCartContent);
 
   const loginForm = document.querySelector("#login-form");
   loginForm.addEventListener("submit", login);

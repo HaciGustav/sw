@@ -43,7 +43,7 @@ export const removeFromCart = (e) => {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   console.log(cart);
-  displayCartContent(productsStore);
+  displayCartContent();
 };
 
 //CART POPOVER
