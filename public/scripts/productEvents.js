@@ -59,6 +59,8 @@ export const removeFromCart = (e) => {
 export const displayCartContent = () => {
   const cartContainer = document.querySelector(".cart-content");
   const cartContent = JSON.parse(localStorage.getItem("cart"));
+
+  //if there is an element other then checkout button then remove all
   if (cartContainer.childElementCount > 1) {
     const children = cartContainer.querySelectorAll(".cart-product");
     children.forEach((child) => child.remove());
@@ -66,10 +68,21 @@ export const displayCartContent = () => {
 
   cartContent.forEach((item) => {
     const product = productsStore.find((product) => product.id == item.id);
+
+    // This method is callesd object destructuring
+    // you can extract the fields of an object to use
+    // same as product.price notation
     const { price, title, images, price_BTC, id } = product;
+
     const productCard = document.createElement("div");
+
     productCard.className = "cart-product";
+
+    // data-product-id attribute is used to determine which remove button responsible
+    // of which product. if data-product-id and data-button-id match product will be
+    // removed after calling removeFromCart event
     productCard.setAttribute("data-product-id", id);
+
     productCard.innerHTML = `
     <span class="remove-product" data-button-id=${id} >-</span>
     <img src="${images[0]}" alt="${title}">
@@ -81,14 +94,16 @@ export const displayCartContent = () => {
     </div>
     </p>
     `;
-    // adds the html element to the beginning not to the end of container
     const removeBtn = productCard.querySelector(".remove-product");
     removeBtn.addEventListener("click", removeFromCart);
+    // .prepend() method adds the html element to the beginning not to the end of container
     cartContainer.prepend(productCard);
   });
 };
+
 export const checkoutProducts = (user) => {
   let productIDs = JSON.parse(localStorage.getItem("cart"));
+  //Convert all product ids into Number
   productIDs = productIDs.map((item) => Number(item.id));
   const cart_popover = document.querySelector("#cart-container");
 

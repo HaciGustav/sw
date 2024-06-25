@@ -16,6 +16,10 @@ const updateButton = document.querySelector("#update-btn");
 const modifyButton = document.querySelector("#modify-btn");
 const deleteButton = document.querySelector("#delete-btn");
 
+/**
+ * Basically similar to one in index.js but without popover
+ */
+
 const displayProducts = (products) => {
   const grid = document.querySelector(".grid-container");
   products.forEach((product, index) => {
@@ -73,10 +77,15 @@ const fillInputs = (e) => {
   descriptionInput.value = product.description;
 };
 
+/**
+ * POST request to create Product
+ */
+
 const createProduct = async (e) => {
   e.preventDefault();
   const inputs = form.querySelectorAll("input");
   let isInputEmpty = false;
+  // loop through all inputs and check if empty
   inputs.forEach((input) => {
     if (!input.value) {
       alert(`${input.name} field is required`);
@@ -88,7 +97,7 @@ const createProduct = async (e) => {
     title: titleInput.value,
     price: priceInput.value,
     category: categoryInput.value,
-    tags: tagsInput.value.split("|"),
+    tags: tagsInput.value.split("|"), //remove all '|' characters and make and array out of it
     images: [imageInput.value],
     description: descriptionInput.value,
   };
@@ -107,15 +116,14 @@ const createProduct = async (e) => {
     });
 };
 
+/**
+ * PATCH request for partial modifications
+ *
+ */
 const modifyProduct = async (e) => {
   e.preventDefault();
   const id = form.getAttribute("data-current-product");
-  /*   const newProduct = {
-    title: titleInput.value,
-    price: priceInput.value,
-    category: categoryInput.value,
-    description: descriptionInput.value,
-  }; */
+
   const productData = {};
   const inputs = form.querySelectorAll("input");
   inputs.forEach((input) => {
@@ -143,6 +151,10 @@ const modifyProduct = async (e) => {
       location.reload();
     });
 };
+
+/**
+ * PUT request to update Product completely
+ */
 
 const updateProduct = async (e) => {
   e.preventDefault();
@@ -181,6 +193,9 @@ const updateProduct = async (e) => {
     });
 };
 
+/**
+ * DELETE request to destroy Product completely from the face of the earth :)
+ */
 const deleteProduct = () => {
   const id = form.getAttribute("data-current-product");
   fetch(window.origin + "/api/products/" + id, {

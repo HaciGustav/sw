@@ -17,7 +17,7 @@ const createPurchaseMail = (user, products) => {
   const mail = {
     from: "silkyway.enterprise@gmail.com", // sender address
     to: [user.email],
-    subject: "checkout",
+    subject: "Purchase Confirmation",
     text: "Purchase Confirmation",
     html: `
            <!DOCTYPE html>

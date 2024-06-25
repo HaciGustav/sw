@@ -19,9 +19,9 @@ import {
   addToCart,
   checkoutProducts,
   displayCartContent,
-  removeFromCart,
 } from "./productEvents.js";
 
+// All products are stored in this array not to make get requests each time
 export const productsStore = [];
 
 const scrollers = document.querySelectorAll(".h-scroll-container");
@@ -37,8 +37,15 @@ if (!window.matchMedia("(prefers-reduces-motion: reduced)").matches) {
   initAnimations();
 }
 
+/**
+ * Makes a get request to create avatar according to users firstname
+ * response type is a png file therefore we are creating a blob out of it
+ * and a temporary url to use in HTML img tag
+ * for detailed info about blob object :
+ * https://developer.mozilla.org/en-US/docs/Web/API/Blob
+ *  */
+
 const createAvatar = (name) => {
-  const img = document.querySelector("#user_img");
   if (!name) {
     userImg.style.display = "none";
     return;
@@ -55,6 +62,11 @@ const createAvatar = (name) => {
       userImg.src = "https://robohash.org/default";
     });
 };
+
+/**
+ * it retrieves the user object from cookies and
+ * decodes and parses it to JS Object with JSON.parse
+ */
 
 const getUserCred = () => {
   const cookies = decodeURIComponent(document.cookie);
@@ -249,6 +261,10 @@ const logout = (e) => {
     }
   });
 };
+
+/**
+ * Retrieve user information from cookies and check if user is Admin
+ */
 
 const navigateToAdminPage = () => {
   const user = getUserCred();
