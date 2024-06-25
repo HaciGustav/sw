@@ -172,7 +172,6 @@ const updateProduct = async (req, res) => {
       !category ||
       id === undefined
     ) {
-      // console.log("BODY====> ", req.body);
       return res.status(400).send("All fields are required");
     }
 
@@ -264,13 +263,18 @@ const modifyProduct = async (req, res) => {
     res.status(500).send("An error occurred while updating the product");
   }
 };
+
 const checkout = async (req, res) => {
   try {
     const { user, productIDs } = req.body;
     console.log(productIDs);
+
+    //Find all products which productIDs array contains
     const purchasedProducts = await Product.find({
       id: { $in: [...productIDs] },
     }).exec();
+
+    // Mail Func is extra
     await sendPurchaseMail(user, purchasedProducts);
     res.status(200).send(purchasedProducts);
   } catch (error) {
