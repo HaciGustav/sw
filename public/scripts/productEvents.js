@@ -90,6 +90,7 @@ export const displayCartContent = () => {
 export const checkoutProducts = (user) => {
   let productIDs = JSON.parse(localStorage.getItem("cart"));
   productIDs = productIDs.map((item) => Number(item.id));
+  const cart_popover = document.querySelector("#cart-container");
 
   fetch("/api/products/checkout", {
     method: "POST",
@@ -104,6 +105,8 @@ export const checkoutProducts = (user) => {
     .then((res) => res.json())
     .then((res) => {
       console.log(res);
-      localStorage.removeItem(cart);
+      alert("Checkout has been proceed");
+      localStorage.removeItem("cart");
+      cart_popover.hidePopover();
     });
 };
