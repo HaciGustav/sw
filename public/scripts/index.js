@@ -306,7 +306,7 @@ const displayProducts = (products) => {
                     .map((tag) => `<span class="tag">${tag}</span>`)
                     .join("")}
                   </div>
-                  <h2 class="product-title">Product Title</h2>
+                  <h2 class="product-title">${product.title}</h2>
                   <p class="product-price">
                     Price: <span class="usd-price">$${product.price}</span> |
                     <span class="btc-price">${product.price_BTC} BTC</span>
