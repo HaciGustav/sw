@@ -346,10 +346,11 @@ window.onload = () => {
       });
     });
 
-  fetch("/xml")
+  fetch("/ip")
   .then(resp => resp.text())
   .then(data => {
-    document.querySelector("#xml").innerHTML = data;
+    let ip = new DOMParser().parseFromString(data, "text/xml").getElementsByTagName("ip")[0].childNodes[0].nodeValue;
+    document.querySelector("#xml").innerHTML = ip;
   });
 
   const cartBtn = document.querySelector("#shopping-cart");
