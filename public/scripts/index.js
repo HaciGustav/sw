@@ -286,7 +286,6 @@ export const getAllProducts = async () => {
     return resp.json();
   });
   return data;
-  return data;
 };
 
 const displayProducts = (products) => {
@@ -295,23 +294,18 @@ const displayProducts = (products) => {
   products.forEach((product, index) => {
     productsStore.push(product);
     grid.innerHTML += `
-            <button popovertarget="product_${index}" data-product-id= ${
-      product.id
-    }>
+            <button popovertarget="product_${index}" data-product-id= ${product.id}>
                 <div class="grid-item grid-item-xl">
                     <img src="${product.images[0]}" alt="${product.title}">
                     <div class="overlay">${product.title}</div>
                 </div>
                 <div id="product_${index}" class="product_popover" popover>
                 <span class="close-popover" >X</span>
-                 <img src=${
-                   product.images[0]
-                 } alt="Product Image" class="product-img" />
+                 <img src=${product.images[0]} alt="Product Image" 
+                      class="product-img" />
                 <div class="product-details">
                   <div class="product-tags">
-                  ${product.tags
-                    .map((tag) => `<span class="tag">${tag}</span>`)
-                    .join("")}
+                  ${product.tags.reduce((acc, tag) => acc + `<span class="tag">${tag}</span>`)}
                   </div>
                   <h2 class="product-title">${product.title}</h2>
                   <p class="product-price">
@@ -321,9 +315,8 @@ const displayProducts = (products) => {
                   <p class="product-description">
                   ${product.description}
                   </p>
-                   <span class="add-to-cart" data-product-id=${
-                     product.id
-                   }>Add to Cart</span>
+                   <span class="add-to-cart" data-product-id=${product.id}>
+                        Add to Cart</span>
                 </div>
                 </div>
             </button>
@@ -347,11 +340,11 @@ window.onload = () => {
     });
 
   fetch("/api/ip")
-  .then(resp => resp.text())
-  .then(data => {
-    let ip = new DOMParser().parseFromString(data, "text/xml").getElementsByTagName("ip")[0].childNodes[0].nodeValue;
-    document.querySelector("#xml").innerHTML = ip;
-  });
+    .then(resp => resp.text())
+    .then(data => {
+      const ip = new DOMParser().parseFromString(data, "text/xml").getElementsByTagName("ip")[0].childNodes[0].nodeValue;
+      document.querySelector("#xml").innerHTML = ip;
+    });
 
   const cartBtn = document.querySelector("#shopping-cart");
   cartBtn.addEventListener("click", displayCartContent);
@@ -367,6 +360,7 @@ window.onload = () => {
   userImg.addEventListener("click", navigateToAdminPage);
 
   const user = getUserCred();
+
   createAvatar(user?.firstname);
 
   checkoutBtn.addEventListener("click", (e) => checkoutProducts(user));
@@ -383,5 +377,5 @@ window.onload = () => {
 };
 
 const displayUserInfo = (user) => {
-  document.querySelector("#user_info").innerHTML = `SilkyWay ${user.country}`;
+  document.querySelector("#user_info").innerHTML = `SilkyWay ${user?.country || ""}`;
 };
