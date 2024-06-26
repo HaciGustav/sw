@@ -305,7 +305,7 @@ const displayProducts = (products) => {
                       class="product-img" />
                 <div class="product-details">
                   <div class="product-tags">
-                  ${product.tags.reduce((acc, tag) => acc + `<span class="tag">${tag}</span>`)}
+                  ${product.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                   </div>
                   <h2 class="product-title">${product.title}</h2>
                   <p class="product-price">
