@@ -113,7 +113,7 @@ function filter(elmnt, category) {
 async function addCredits(userId, credits) {
   try {
     const response = await fetch(
-      "http://localhost:8080/api/users/add-credits",
+      "/api/users/add-credits",
       {
         method: "POST",
         headers: {
@@ -135,7 +135,7 @@ async function addCredits(userId, credits) {
 async function purchaseProduct(userId, productId) {
   try {
     const response = await fetch(
-      "http://localhost:8080/api/users/purchase-product",
+      "/api/users/purchase-product",
       {
         method: "POST",
         headers: {
@@ -346,7 +346,7 @@ window.onload = () => {
       });
     });
 
-  fetch("http://localhost:8080/api/ip")
+  fetch("/api/ip")
   .then(resp => resp.text())
   .then(data => {
     let ip = new DOMParser().parseFromString(data, "text/xml").getElementsByTagName("ip")[0].childNodes[0].nodeValue;
