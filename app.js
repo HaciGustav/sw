@@ -53,7 +53,7 @@ router.get("/categories", category.getCategories);
 router.post("/categories", category.createCategory);
 
 // GET XML :D
-app.get("/ip", (req, res) => {
+router.get("/ip", (req, res) => {
   res.set("Content-Type", "text/xml");
   res.send(`
     <user>

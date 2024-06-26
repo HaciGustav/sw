@@ -346,7 +346,7 @@ window.onload = () => {
       });
     });
 
-  fetch("/ip")
+  fetch("http://localhost:8080/api/ip")
   .then(resp => resp.text())
   .then(data => {
     let ip = new DOMParser().parseFromString(data, "text/xml").getElementsByTagName("ip")[0].childNodes[0].nodeValue;
